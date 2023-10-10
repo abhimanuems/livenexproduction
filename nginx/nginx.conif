@@ -1,0 +1,41 @@
+#vi nginx.conf
+upstream nodeapp{
+     server node_app:3001;
+}
+
+server {
+  listen 80;
+  root /usr/share/nginx/html;
+  index index.html;
+  
+  location / {
+   try_files $uri /index.html =404;
+  }
+
+  location /auth {
+ proxy_pass http://nodeapp/auth;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+  }
+
+  location /users/ {
+        proxy_pass http://nodeapp/users/;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
+
+    location /admin/ {
+        proxy_pass http://nodeapp/admin/;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
+
+
+    location = /favicon.ico {
+        alias /usr/share/nginx/html/favicon.ico;
+    }
+    
+}
