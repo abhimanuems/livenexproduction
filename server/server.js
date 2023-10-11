@@ -10,15 +10,15 @@ import session from "express-session";
 import { Server } from "socket.io";
 import { spawn } from "child_process";
 mongoose.connect(process.env.MONGO_URL).then(() => console.log("Connected!")).catch((err)=>console.error(err.message))
-import authRouter from "../src/routes/auth.js";
-import service from "../src/routes/services.js";
-import adminRouter from "../src/routes/admin.js";
-import { verifyToken } from "../src/middileware/authmiddileware.js";
+import authRouter from "./routes/auth.js";
+import service from "./routes/services.js";
+import adminRouter from "./routes/admin.js";
+import { verifyToken } from "./middileware/authmiddileware.js";
 import {
   youtubeSettings,
   facebookSettings,
   inputSettings,
-} from "../src/Controllers/ffmpeg.js";
+} from "./Controllers/ffmpeg.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
