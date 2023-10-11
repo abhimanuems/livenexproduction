@@ -170,7 +170,7 @@ const VideoStreaming = () => {
   };
 
 
-  const socket = io(io("ws://localhost:3100"), {
+  const socket = io(io("ws://16.171.253.6"), {
     transports: ["websocket"],
     query: {
       rtmpUrlYoutube: rtmpurlYoutube,

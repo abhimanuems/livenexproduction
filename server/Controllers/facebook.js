@@ -46,7 +46,7 @@ const oauthCallbackFB = async (req, res) => {
 
     res.send(`
           <script>
-            window.opener.postMessage('http://localhost:3000');
+            window.opener.postMessage('http://16.171.253.6');
             window.close();
           </script>
         `);
