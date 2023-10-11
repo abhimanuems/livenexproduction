@@ -1,4 +1,2 @@
 ./node_modules
-Dockerfile.backend
 .dockerignore
-docker-compose.yaml
