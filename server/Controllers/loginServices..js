@@ -87,7 +87,7 @@ const googleCallBack = (req, res) => {
           <script>
             window.opener.postMessage(${JSON.stringify(
               user
-            )}, 'http://51.20.61.15');
+            )}, 'http://livenex.online/');
             window.close();
           </script>
         `);

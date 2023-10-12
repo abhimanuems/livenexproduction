@@ -46,7 +46,7 @@ const oauthCallbackFB = async (req, res) => {
 
     res.send(`
           <script>
-            window.opener.postMessage('http://51.20.61.15');
+            window.opener.postMessage('http://livenex.online/');
             window.close();
           </script>
         `);
