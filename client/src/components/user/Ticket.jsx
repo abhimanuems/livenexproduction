@@ -16,11 +16,12 @@ const Ticket = () => {
   const [ticketDataAPI] = useTicketDataMutation();
   const [viewTicket,setViewTicket] = useState(false);
   const [ticketDatas,setTicketData] = useState(null);
-   if (typeof userInfo.deatils === String) {
-     setEmail(userInfo.deatils);
-   } else {
-     setEmail(userInfo.deatils.email);
-   }
+   if(typeof(userInfo.deatils) === String){
+    setEmail(userInfo.deatils)
+  } 
+  else{
+    setEmail(userInfo.deatils.email)
+  }
 
   useEffect(() => {
     getTicketData();
@@ -60,7 +61,7 @@ const Ticket = () => {
   return (
     <div>
       <div className="p-1 m-1 text-right">
-        {ticketDatas.length ? (
+        {ticketDatas?.length ? (
           <button
             className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
             onClick={() => setViewTicket(!viewTicket)}

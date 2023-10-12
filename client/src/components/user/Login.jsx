@@ -19,7 +19,7 @@ export default function Login() {
   const { userInfo } = useSelector((state) => state.auth);
   useEffect(() => {
     if (userInfo) {
-      navigate("/admin");
+      navigate("/");
     }
   }, [navigate, userInfo]);
   const handleSubmit = async (e) => {
@@ -29,7 +29,7 @@ export default function Login() {
       if (response.message) {
         console.log(response)
         dispatch(setCredentials({ deatils :response.user }));
-        navigate("/admin");
+        navigate("/");
         toast.error(response);
       } else if (response.error) {
         toast.error("inavlid credintials");
@@ -55,7 +55,7 @@ export default function Login() {
           console.log(response);
           authWindow.close();
           window.removeEventListener("message", messageListener);
-          if (response) navigate("/admin");
+          if (response) navigate("/");
         }
       };
       window.addEventListener("message", messageListener);

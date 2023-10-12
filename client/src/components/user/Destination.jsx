@@ -102,6 +102,7 @@ export default function Modal() {
       );
 
       const messageListener = (event) => {
+        console.log("event at facebook")
         if (event.origin === "https://livenex.online/") {
           const response = event.data;
           console.log("face book auth data us ",event)
@@ -122,11 +123,13 @@ export default function Modal() {
   };
   const youtube = () => {
     try {
+
       const authWindow = window.open(
         "https://livenex.online/users/youtubeAuth"
       );
 
       const messageListener = async (event) => {
+        console.log("event at youtube is ",event)
         if (event.origin === "https://livenex.online/") {
           const response = event.data;
           console.log("response from youtube live stream ", response);
