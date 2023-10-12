@@ -2,7 +2,6 @@ import React from "react";
 import { BsFacebook, BsYoutube } from "react-icons/bs";
 
 const Chat = (props) => {
-  console.log(props);
   const YTComments = props.comments[1];
   const fbComments = props.comments[0];
 

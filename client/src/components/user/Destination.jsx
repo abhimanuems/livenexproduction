@@ -83,17 +83,6 @@ export default function Modal() {
     }
   }, [isFb, isYoutube, youtubeTD]);
 
-  // useEffect(()=>{
-  //   if(youTubeAccessToken){
-  //     setTimeout(()=>{
-  //        youtubeToken({
-  //          authorizeToken: youTubeAccessToken,
-  //          titleDescription: { title ,description},
-  //        }).unwrap();
-  //     },2000)
-
-  //   }
-  // },youTubeAccessToken)
 
   const facebook = () => {
     try {
@@ -103,7 +92,7 @@ export default function Modal() {
 
       const messageListener = (event) => {
         console.log("event at facebook")
-        if (event.origin === "https://livenex.online/") {
+        if (event.origin === "https://livenex.online") {
           const response = event.data;
           console.log("face book auth data us ",event)
           console.log("facebook auth response is ",response)
@@ -124,13 +113,13 @@ export default function Modal() {
   const youtube = () => {
     try {
 
-      const authWindow = window.open(
+       window.open(
         "https://livenex.online/users/youtubeAuth"
       );
 
       const messageListener = async (event) => {
         console.log("event at youtube is ",event)
-        if (event.origin === "https://livenex.online/") {
+        if (event.origin === "https://livenex.online") {
           const response = event.data;
           console.log("response from youtube live stream ", response);
           if (response.message === "AuthenticationSuccessful") {
@@ -253,7 +242,6 @@ export default function Modal() {
                         tabIndex="-1"
                       >
                         <div className="py-3 flex" role="none">
-                          {/* Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" */}
                           <a
                             className="text-gray-700 block px-4 py-2 text-sm"
                             role="menuitem"
@@ -283,7 +271,7 @@ export default function Modal() {
                     )}
                   </div>
                 </div>
-                {/* <div className="relative p-6 flex-auto"></div> */}
+               
                 {youtubeTD ? (
                   <div className="relative m-2 p-2">
                     <label className="m-2 p-2 text-slate-500 text-lg leading-relaxed">

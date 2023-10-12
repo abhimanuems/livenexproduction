@@ -143,7 +143,6 @@ const VideoStreaming = () => {
         displayMessage: item.snippet.displayMessage,
         displayName: item.authorDetails.displayName,
       }));
-      console.log("extractedData", extractedData);
       setYTliveComment(extractedData);
       console.log(ytLivecomments);
     } catch (err) {
@@ -179,21 +178,9 @@ const VideoStreaming = () => {
       console.error("Socket is not initialized.");
       return;
     }
-    // setRTMPUrls();
     recorderInit();
     setActive(true);
 
-    // const youtubeComments = async()=>{
-    //  const youtubeComments = await youTubeComments().unwrap();
-    //  console.log(youtubeComments);
-    // }
-    //  if (intervalIdRef.current) {
-    //    clearInterval(intervalIdRef.current);
-    //  }
-    //   intervalIdRef.current = setInterval(()=>{
-    //     youtubeComments();
-    //     fbcomments();
-    //   }, 50000);
   };
 
   const recorderInit = () => {
