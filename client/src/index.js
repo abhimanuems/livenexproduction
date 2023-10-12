@@ -64,20 +64,20 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin",
+    path: "/admins",
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/admin/dashboard",
+        path: "/admins/dashboard",
         element: <DashboardPage />,
       },
       {
-        path: "/admin/login",
+        path: "/admins/login",
         element: <Login />,
       },
       {
-        path: "/admin/subscription",
+        path: "/admins/subscription",
         element: (
           <Suspense fallback={<div>Loading Subscription Admin...</div>}>
             <SubscriptionAdmin />
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/user",
+        path: "/admins/user",
         element: (
           <Suspense fallback={<div>Loading Subscription Admin...</div>}>
             <UserPageAdmin />
@@ -93,7 +93,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/ticket",
+        path: "/admins/ticket",
         element: (
           <Suspense fallback={<div>Loading Subscription Admin...</div>}>
             <AdminTicketPage />

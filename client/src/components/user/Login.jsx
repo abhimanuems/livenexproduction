@@ -41,10 +41,10 @@ export default function Login() {
   };
   const googleAuth = async () => {
     try {
-      const authWindow = window.open("http://localhost:8000/auth/google");
+      const authWindow = window.open("http://51.20.61.15/auth/google");
 
       const messageListener = (event) => {
-        if (event.origin === "http://localhost:8000") {
+        if (event.origin === "http://51.20.61.15") {
           const response = event.data;
           dispatch(setCredentials({ deatils: response.email }));
           console.log(response);

@@ -87,7 +87,7 @@ const googleCallBack = (req, res) => {
           <script>
             window.opener.postMessage(${JSON.stringify(
               user
-            )}, 'http://16.171.253.6');
+            )}, 'http://51.20.61.15');
             window.close();
           </script>
         `);

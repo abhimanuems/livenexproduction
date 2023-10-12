@@ -97,12 +97,10 @@ export default function Modal() {
 
   const facebook = () => {
     try {
-      const authWindow = window.open(
-        "http://localhost:8000/users/facebookauth"
-      );
+      const authWindow = window.open("http://51.20.61.15/users/facebookauth");
 
       const messageListener = (event) => {
-        if (event.origin === "http://localhost:8000") {
+        if (event.origin === "http://51.20.61.15") {
           const response = event.data;
 
           authWindow.close();
@@ -121,10 +119,10 @@ export default function Modal() {
   };
   const youtube = () => {
     try {
-      const authWindow = window.open("http://localhost:8000/users/youtubeAuth");
+      const authWindow = window.open("http://51.20.61.15/users/youtubeAuth");
 
       const messageListener = async (event) => {
-        if (event.origin === "http://localhost:8000") {
+        if (event.origin === "http://51.20.61.15") {
           const response = event.data;
 
           if (response.message === "AuthenticationSuccessful") {

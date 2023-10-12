@@ -44,7 +44,7 @@ const oauthCallback = async (req, res) => {
 
     res.send(`
       <script>
-        window.opener.postMessage({ message: 'AuthenticationSuccessful', data: { authorizeToken: '${authorizeToken}' } }, 'http://16.171.253.6');
+        window.opener.postMessage({ message: 'AuthenticationSuccessful', data: { authorizeToken: '${authorizeToken}' } }, 'http://51.20.61.15');
         window.close();
       </script>
     `);

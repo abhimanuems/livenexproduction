@@ -1,7 +1,7 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://16.171.253.6/",
+  baseUrl: "http://51.20.61.15/",
   credentials: "include",
 });
 
