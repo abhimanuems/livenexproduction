@@ -14,7 +14,7 @@ const Header = () => {
         await adminLogutApi().unwrap().then((res)=>{
             toast.info("logout successfull")
             dispatch(logoutAdmin());
-            navigate('/admin/login/')
+            navigate('/admins/login/')
         }).catch((err)=>{
             toast.error("some internal error")
         })

@@ -170,13 +170,15 @@ const VideoStreaming = () => {
   };
 
 
-  const socket = io(io("ws://51.20.61.15"), {
-    transports: ["websocket"],
-    query: {
-      rtmpUrlYoutube: rtmpurlYoutube,
-      rtmUrlFaceBook: rtmpUrlFb,
-    },
-  });
+  const socket =
+    (io("wss://livenex.online/"),
+    {
+      transports: ["websocket"],
+      query: {
+        rtmpUrlYoutube: rtmpurlYoutube,
+        rtmUrlFaceBook: rtmpUrlFb,
+      },
+    });
 
   const handleStartRecording = () => {
     if (!socket) {

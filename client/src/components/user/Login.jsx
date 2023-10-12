@@ -41,10 +41,12 @@ export default function Login() {
   };
   const googleAuth = async () => {
     try {
-      const authWindow = window.open("http://livenex.online//auth/google");
+      const authWindow = window.open(
+        "https://livenex.online/auth/google"
+      );
 
       const messageListener = (event) => {
-        if (event.origin === "http://livenex.online/") {
+        if (event.origin === "https://livenex.online/") {
           const response = event.data;
           dispatch(setCredentials({ deatils: response.email }));
           console.log(response);

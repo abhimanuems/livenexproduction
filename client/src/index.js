@@ -14,6 +14,7 @@ import ErrorPage from "./components/user/ErrorPage";
 import TicketPage from "./components/pages/TicketPage";
 import Login from "./components/admin/Login"
 import SharePage from "./components/pages/SharePage";
+import ErrorPageAdmin from "./components/admin/ErrorPageAdmin";
 const SubscriptionAdmin = lazy(() =>
   import("./components/Adminpages/subscriptionAdmin")
 );
@@ -21,6 +22,7 @@ const UserPageAdmin = lazy(()=>import("./components/Adminpages/UserlistPage"));
 const AdminTicketPage = lazy(()=>import("./components/Adminpages/TicketPageAdmin"))
 const DashboardPage = lazy(()=>import("./components/Adminpages/DashboardPage"))
 const Homepage = lazy(() => import("./components/pages/Homepage"));
+
 
 
 const router = createBrowserRouter([
@@ -66,7 +68,7 @@ const router = createBrowserRouter([
   {
     path: "/admins",
     element: <App />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorPageAdmin />,
     children: [
       {
         path: "/admins/dashboard",

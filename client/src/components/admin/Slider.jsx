@@ -13,7 +13,7 @@ const Slider = () => {
         <li>
           <button
             className="flex w-full py-2 px-4 text-left hover:bg-blue-950 rounded-md"
-            onClick={() => navigate("/admin/dashboard")}
+            onClick={() => navigate("/admins/dashboard")}
           >
             <span className="mt-1">
               <RiDashboardFill />
@@ -25,7 +25,7 @@ const Slider = () => {
           <button
             className="flex w-full py-2 px-4 text-left hover:bg-blue-950 rounded-md"
             onClick={() => {
-              navigate("/admin/subscription");
+              navigate("/admins/subscription");
             }}
           >
             <span className="mt-1">
@@ -38,7 +38,7 @@ const Slider = () => {
           <button
             className="flex w-full py-2 px-4 text-left hover:bg-blue-950 rounded-md"
             onClick={() => {
-              navigate("/admin/user");
+              navigate("/admins/user");
             }}
           >
             <span className="mt-1">
@@ -50,7 +50,7 @@ const Slider = () => {
         <li>
           <button
             className="flex w-full py-2 px-4 text-left hover:bg-blue-950 rounded-md"
-            onClick={() => navigate("/admin/ticket")}
+            onClick={() => navigate("/admins/ticket")}
           >
             <span className="mt-1">
               <FaTicketSimple />

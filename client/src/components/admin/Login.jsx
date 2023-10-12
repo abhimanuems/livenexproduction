@@ -15,7 +15,7 @@ function Login() {
   console.log("admin info is ",adminInfo)
   useEffect(() => {
     if (adminInfo) {
-      navigate("/admin/dashboard");
+      navigate("/admins/dashboard");
     }
   }, [adminInfo]);
 
@@ -32,7 +32,7 @@ function Login() {
    await loginAPI({userName,password}).unwrap().then((response)=>{
     toast.info("login successful");
     dispatch(setCredentialsAdmin({details: response.adminUserName }));
-    navigate("/admin/dashboard");
+    navigate("/admins/dashboard");
 
    }).catch((err)=>{
      toast.error("invalid username or password");
