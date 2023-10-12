@@ -8,6 +8,7 @@ import {
   subscriptionsDetails,
   tickets,
   ticketResolve,
+  logout,
 } from "../Controllers/admin.js";
 
 const adminRouter = Router();
@@ -25,6 +26,8 @@ adminRouter.get("/subscription",adminAuthProtect,subscriptionsDetails)
 adminRouter.get("/tickets", adminAuthProtect,tickets);
 
 adminRouter.post("/ticketreply",adminAuthProtect,ticketResolve)
+
+adminRouter.get("/logout", adminAuthProtect,logout);
 
 
 export default adminRouter

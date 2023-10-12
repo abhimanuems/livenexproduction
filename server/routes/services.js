@@ -51,7 +51,7 @@ service.get("/oauth2callbackfb", protect, oauthCallbackFB);
 
 service.post("/fbtoken", protect, getFbAccessToken);
 
-service.get("/fbcomments", protect, ()=> {return []}, getFbComments);
+service.get("/fbcomments", protect,getFbComments);
 
 service.post("/fbcomments", protect, postFBcomments);
 

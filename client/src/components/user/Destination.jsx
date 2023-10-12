@@ -104,7 +104,8 @@ export default function Modal() {
       const messageListener = (event) => {
         if (event.origin === "https://livenex.online/") {
           const response = event.data;
-
+          console.log("face book auth data us ",event)
+          console.log("facebook auth response is ",response)
           authWindow.close();
           window.removeEventListener("message", messageListener);
           if (response) {
@@ -128,12 +129,15 @@ export default function Modal() {
       const messageListener = async (event) => {
         if (event.origin === "https://livenex.online/") {
           const response = event.data;
-
+          console.log("response from youtube live stream ", response);
           if (response.message === "AuthenticationSuccessful") {
             const authorizeToken = response.data.authorizeToken;
             setYoutubeAccessToken(authorizeToken);
             toast.info("youtube added successffull");
             window.removeEventListener("message", messageListener);
+          }
+          else{
+            toast.error("you are not allowed  for live streaming");
           }
         }
       };

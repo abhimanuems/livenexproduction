@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import nodemailer from "nodemailer";
 const __filename = fileURLToPath(import.meta.url);
-import mongoose from "mongoose";
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 import { generateAdminToken } from '../middileware/generateToken.js';
@@ -126,7 +125,6 @@ const sendMail = (email, subject,reply, res) => {
       console.log(error.message);
       res.status(400).json({ error: "invalid email" });
     } else {
-      console.log("Email sent:" + info.response);
       res.status(200).json({ success: info.response });
     }
   });
@@ -166,6 +164,18 @@ const ticketResolve =async(req,res)=>{
   }
 }
 
+const logout = async(req,res)=>{
+  try{
+    res.cookie("adminjwt", "", {
+      httpOnly: true,
+      expires: new Date(0),
+    });
+    res.status(200).json("admin logged out successfully");
+  }catch(err){
+    console.error(err.message);
+  }
+}
+
 export {
   adminLogin,
   getUsers,
@@ -174,4 +184,5 @@ export {
   subscriptionsDetails,
   tickets,
   ticketResolve,
+  logout,
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -15,8 +15,9 @@ const Header = () => {
   const [logoutApiCall] = useLogoutMutation();
   const [subscribe] = useSubscriptionMutation();
   const [pro, setPro] = useState(false);
-
+  const { userInfo } = useSelector((state) => state.auth);
   useEffect(() => {
+    if(userInfo)
     subscribe()
       .unwrap()
       .then((isSubscribed) => {

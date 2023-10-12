@@ -108,7 +108,6 @@ const googleCallBack = (req, res) => {
 };
 
 const logout = (req, res) => {
-  console.log("enter at logit")
   try {
     res.cookie("jwt", "", {
       httpOnly: true,

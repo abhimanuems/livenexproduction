@@ -19,7 +19,7 @@ export default function Login() {
   const { userInfo } = useSelector((state) => state.auth);
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      navigate("/admin");
     }
   }, [navigate, userInfo]);
   const handleSubmit = async (e) => {
@@ -46,17 +46,20 @@ export default function Login() {
       );
 
       const messageListener = (event) => {
-        if (event.origin === "https://livenex.online/") {
-          const response = event.data;
+        if (event.origin === "https://livenex.online") {
+          const response = event.data; 
+          console.log("google auth login is ",response)
+          toast.info("login successful");
+
           dispatch(setCredentials({ deatils: response.email }));
           console.log(response);
           authWindow.close();
           window.removeEventListener("message", messageListener);
-          if (response) navigate("/");
+          if (response) navigate("/admin");
         }
       };
       window.addEventListener("message", messageListener);
-      toast.info("login successful");
+    
     } catch (error) {
       if (error) throw error;
       toast.error(error.message);

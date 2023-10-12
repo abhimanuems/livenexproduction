@@ -8,14 +8,19 @@ import ViewTicktes from "../user/ViewTicktes"
 import { useSelector } from "react-redux";
 
 const Ticket = () => {
-     const { userInfo } = useSelector((state) => state.auth);
-  const [email,setEmail] = useState(userInfo.deatils);
+  const { userInfo } = useSelector((state) => state.auth);
+  const [email, setEmail] = useState('');
   const [subject,setSubject] = useState('');
   const [description,SetDescription] = useState('');
   const [ticketAPI] = useTicketMutation();
   const [ticketDataAPI] = useTicketDataMutation();
   const [viewTicket,setViewTicket] = useState(false);
   const [ticketDatas,setTicketData] = useState(null);
+   if (typeof userInfo.deatils === String) {
+     setEmail(userInfo.deatils);
+   } else {
+     setEmail(userInfo.deatils.email);
+   }
 
   useEffect(() => {
     getTicketData();
@@ -55,7 +60,7 @@ const Ticket = () => {
   return (
     <div>
       <div className="p-1 m-1 text-right">
-        {ticketDatas ? (
+        {ticketDatas.length ? (
           <button
             className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
             onClick={() => setViewTicket(!viewTicket)}

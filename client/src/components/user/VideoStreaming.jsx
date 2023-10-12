@@ -18,7 +18,6 @@ import { GoUnmute } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import Cookies from "js-cookie";
 import {
   useFacebookGetCommentsMutation,
   useYoutubeCommentsMutation,
@@ -153,20 +152,14 @@ const VideoStreaming = () => {
   };
 
   const setRTMPUrls = () => {
-    console.log("facebook", userDetails?.rtmpUrl);
-    console.log("youtube us ", userDetails?.rtmpurlYoutube);
     if (userDetails?.rtmpUrl) {
-      console.log("enetr at facebook");
       setRtmpFb(userDetails?.rtmpUrl);
     } else {
-      alert("facebook is not ser");
+  
     }
     if (userDetails?.rtmpurlYoutube) {
-      console.log("enter at the youtube");
       setyoutubeRTMP(userDetails?.rtmpurlYoutube);
-    } else {
-      // alert("youtube is not set");
-    }
+    } 
   };
 
 
@@ -269,6 +262,7 @@ const VideoStreaming = () => {
   };
 
   const leaveStudio = () => {
+    navigate("/");
     socket.emit("client-stop-ffmpeg");
     if (stream) {
       const tracks = stream.getTracks();
@@ -278,13 +272,12 @@ const VideoStreaming = () => {
     stopRecording();
     dispatch(clearRTMPURLS());
     deleteRTMPURL();
-    navigate("/");
+    
   };
 
   const sendComment = async () => {
     if (comment.trim === "") {
       toast.error("Kindly enter a comment");
-      alert("shjsjghjh");
       return;
     }
     await YTpostComment({ comment }).unwrap();
@@ -345,7 +338,7 @@ const VideoStreaming = () => {
             ref={videoRef}
             autoPlay
             playsInline
-            muted={!isCameraActive} // Mute/unmute based on camera state
+            muted={!isCameraActive} 
           />
         </div>
         <div className="flex justify-center mt-1">

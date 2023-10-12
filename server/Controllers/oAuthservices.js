@@ -30,7 +30,7 @@ const youtubeAuth = async (req, res) => {
     });
     res.redirect(authUrl);
   } catch (err) {
-    if (err) console.log(err.message);
+    if (err) console.error(err.message);
     throw err;
   }
 };
