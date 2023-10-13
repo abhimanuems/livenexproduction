@@ -150,7 +150,7 @@ const VideoStreaming = () => {
  
 
 
-  const socket = io("ws://livenex.shop:3100", {
+  const socket = io("wss://livenex.shop:3100", {
     transports: ["websocket"],
     query: {
       rtmpUrlYoutube: rtmpurlYoutube,

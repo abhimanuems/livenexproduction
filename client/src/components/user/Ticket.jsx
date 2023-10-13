@@ -9,20 +9,13 @@ import { useSelector } from "react-redux";
 
 const Ticket = () => {
   const { userInfo } = useSelector((state) => state.auth);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(userInfo?.deatils);
   const [subject,setSubject] = useState('');
   const [description,SetDescription] = useState('');
   const [ticketAPI] = useTicketMutation();
   const [ticketDataAPI] = useTicketDataMutation();
   const [viewTicket,setViewTicket] = useState(false);
   const [ticketDatas,setTicketData] = useState(null);
-   if(typeof userInfo.deatils === String){
-    setEmail(userInfo?.deatils)
-  } 
-  else{
-    setEmail(userInfo?.deatils?.email)
-  }
-
   useEffect(() => {
     getTicketData();
   }, []);
