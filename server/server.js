@@ -64,8 +64,6 @@ const io = new Server(process.env.WSPORT || 3100, {
   },
 });
 // io.use(verifyToken);
-
-
 io.on("connection", (socket) => {
   console.log("socket connected ",socket.id)
   const rtmpUrlYoutube = socket.handshake.query.rtmpUrlYoutube;

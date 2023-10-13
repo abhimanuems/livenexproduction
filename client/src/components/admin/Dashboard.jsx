@@ -9,15 +9,13 @@ import {
   Legend,
   PieChart,
   Pie,
-  Sector,
   Cell,
-  ResponsiveContainer,
 } from "recharts";
 import {
   useUserslistMutation,
   useSubscriptionListMutation,
 } from "../../slices/adminApiSlice";
-import {toast} from "react-toastify"
+
 
  const Dashboard = () => {
   const [usersAPI] = useUserslistMutation();
@@ -26,8 +24,7 @@ import {toast} from "react-toastify"
   const [pieChartData, setpieChartData] = useState([]);
   const [dashboardData, setdashboardData] = useState({});
   const [noOfUsers,setNoofUsers] = useState(null);
-  const [noofSubscribers,setnoOfSubscribers] = useState(null);
-  const [subscriptionsData ,setSubscriptionsData] = useState(null);
+  const [noofSubscribers,setnoOfSubscribers] = useState(null);;
 
   useEffect(() => {
     const getChartData = async () => {
@@ -76,8 +73,7 @@ import {toast} from "react-toastify"
       });
       SubcribtionsAPI().unwrap().then((data)=>{
         console.log("subscription data is ",data);
-        const subsribersList = data.subscriptions.length;
-        setSubscriptionsData(data);
+        const subsribersList = data?.subscriptions?.length;
         setchartDatas(data);
         setnoOfSubscribers(subsribersList);
       }).catch((err)=>{

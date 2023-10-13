@@ -32,11 +32,11 @@ export default function Modal() {
 
   const createStream = async () => {
     try {
-      if (title.trim() == "") {
+      if (title.trim() === "") {
         toast.error("Fill the title");
         return;
       }
-      if (description.trim() == "") {
+      if (description.trim() === "") {
         toast.error("fill the description field");
         return;
       }

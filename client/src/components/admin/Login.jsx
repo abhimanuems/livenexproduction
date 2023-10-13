@@ -12,12 +12,11 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { adminInfo } = useSelector((state) => state.adminAuth);
-  console.log("admin info is ",adminInfo)
   useEffect(() => {
     if (adminInfo) {
       navigate("/admins/dashboard");
     }
-  }, [adminInfo]);
+  }, [adminInfo, navigate]);
 
   const login = async(e) => {
     e.preventDefault();

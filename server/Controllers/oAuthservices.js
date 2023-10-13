@@ -135,14 +135,13 @@ const YTviewCount = async (req, response) => {
         }
       )
       .then((res) => {
-        console.log(res.data.items);
         response.status(200).json({
           viewCountYT: res.data.items[0].statistics.viewCount,
           likes: res.data.items[0].statistics.likeCount,
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   } catch (err) {
     console.error(err.message);
@@ -168,7 +167,6 @@ const viewSubscribers = async (req, res) => {
         }
       )
       .then((response) => {
-        console.log(response.data.items);
         res.status(200).json({ subscribersList: response.data.items });
       })
       .catch((error) => {

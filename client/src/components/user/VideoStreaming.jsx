@@ -38,7 +38,6 @@ const VideoStreaming = () => {
   const intervalIdRef = useRef(null);
   const [fbcomments] = useFacebookGetCommentsMutation();
   const [youTubeComments] = useYoutubeCommentsMutation();
-  const [confirmButton, setConfirmButton] = useState(false);
   const [isCameraActive, setCameraActive] = useState(false);
   const [ismute, setMute] = useState(true);
   const [stopCam, setCam] = useState(true);
@@ -56,7 +55,6 @@ const VideoStreaming = () => {
   const [rtmpYoutube] = useRtmpUrlYoutubeMutation();
   const [RTMPFB] = useRtmpUrlFBMutation();
   const [isActive, setActive] = useState(false);
-  //const viewCountTimer = 50000;
   const [viewCountTimer, setviewCountTimer] = useState(5000);
   const [YTviewCount] = useYTviewCountMutation();
   const [FBviewCount] = useFBviewCountMutation();
@@ -67,7 +65,6 @@ const VideoStreaming = () => {
   const [FBstats, setFbstats] = useState(false);
   const [deleteRTMPURLS] = useDeleteRTMPURLSMutation();
   useEffect(() => {
-    // setRTMPUrls();
     const getRTMPYTFB = async () => {
       const rtmpurlYT = await rtmpYoutube().unwrap();
       if (rtmpurlYT == null) {
@@ -150,20 +147,11 @@ const VideoStreaming = () => {
     }
   };
 
-  const setRTMPUrls = () => {
-    if (userDetails?.rtmpUrl) {
-      setRtmpFb(userDetails?.rtmpUrl);
-    } else {
-  
-    }
-    if (userDetails?.rtmpurlYoutube) {
-      setyoutubeRTMP(userDetails?.rtmpurlYoutube);
-    } 
-  };
+ 
 
 
   const socket =
-    (io("wss://livenex.online/"),
+    (io("ws://3.108.88.80/3100"),
     {
       transports: ["websocket"],
       query: {

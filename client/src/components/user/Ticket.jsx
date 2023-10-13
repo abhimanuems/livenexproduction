@@ -16,7 +16,7 @@ const Ticket = () => {
   const [ticketDataAPI] = useTicketDataMutation();
   const [viewTicket,setViewTicket] = useState(false);
   const [ticketDatas,setTicketData] = useState(null);
-   if(typeof(userInfo.deatils) === String){
+   if(typeof userInfo.deatils === String){
     setEmail(userInfo.deatils)
   } 
   else{
@@ -36,20 +36,20 @@ const Ticket = () => {
   }
   const submitTicket =async(e)=>{
     e.preventDefault();
-    if(email.trim()===0){
+    if(email.trim() === ''){
       toast.error("kindly fill the email")
     }
-    if(subject.trim()===0){
+    if(subject.trim() === ''){
       toast.error("Enter a subject")
     }
-    if(description.trim()===0){
+    if(description.trim() === ''){
       toast.error("Enter the description")
     }
     const data = {email,subject,description,status:false}
      ticketAPI(data).unwrap().then((res)=>{
       toast.info("Ticket submitted successful");
       setSubject('');
-      SetDescription('');
+      SetDescription("");
       getTicketData();
       setViewTicket(!viewTicket)
     }).catch((err)=>{
@@ -134,7 +134,7 @@ const Ticket = () => {
                       id="about"
                       name="about"
                       rows={3}
-                      columns={8}
+                      cols={8}
                       className="block  p-1 w-38  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-200 sm:text-sm sm:leading-6"
                       style={{ width: "38%" }}
                       onChange={(e) => SetDescription(e.target.value)}

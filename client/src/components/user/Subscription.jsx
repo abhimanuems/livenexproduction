@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";

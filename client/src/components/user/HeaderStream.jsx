@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLogoutMutation } from "../../slices/userApiSlice";
 import { logout } from "../../slices/authSlice";
-import { Link } from "react-router-dom";
+
 
 const HeaderStream = () => {
   const navigate = useNavigate();
@@ -18,8 +18,7 @@ const HeaderStream = () => {
       navigate("/login");
       toast.error("logout successfully");
     } catch (err) {
-      // toast.error(err.message);
-      console.log(err);
+      console.error(err);
     }
   };
   return (

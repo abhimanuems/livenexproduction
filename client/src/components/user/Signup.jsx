@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 
 
 export default function Signup() {
-  const [signup] = useSignupMutation();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,13 +31,6 @@ export default function Signup() {
      
        dispatch(setUserDetails({email,password }));
        navigate("/verifyotp");
-      // const result = await signup({ email, password }).unwrap();
-      // if (result.message) {
-      //   toast.info("account created");
-      // } else {
-      //   toast.error(result);
-      // }
-      // navigate("/login");
     } catch (err) {
       toast.info("User already exists");
       navigate("/login");
@@ -96,7 +88,7 @@ export default function Signup() {
             {" "}
             Already have an account?{" "}
             <Link to="/login">
-              <a href="#" className="font-medium text-blue-600 hover:underline">
+              <a  className="font-medium text-blue-600 hover:underline">
                 Login
               </a>
             </Link>

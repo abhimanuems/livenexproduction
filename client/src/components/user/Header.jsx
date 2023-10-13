@@ -33,7 +33,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await logoutApiCall().unwrap().then((res)=>{
+       await logoutApiCall().unwrap().then((res)=>{
         toast.error("logout successfully");
          dispatch(logout());
          navigate("/login");
