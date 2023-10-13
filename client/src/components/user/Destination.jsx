@@ -83,7 +83,6 @@ export default function Modal() {
     }
   }, [isFb, isYoutube, youtubeTD]);
 
-
   const facebook = () => {
     try {
       const authWindow = window.open(
@@ -91,11 +90,11 @@ export default function Modal() {
       );
 
       const messageListener = (event) => {
-        console.log("event at facebook")
+        console.log("event at facebook");
         if (event.origin === "https://livenex.online") {
           const response = event.data;
-          console.log("face book auth data us ",event)
-          console.log("facebook auth response is ",response)
+          console.log("face book auth data us ", event);
+          console.log("facebook auth response is ", response);
           authWindow.close();
           window.removeEventListener("message", messageListener);
           if (response) {
@@ -112,23 +111,17 @@ export default function Modal() {
   };
   const youtube = () => {
     try {
-
-       window.open(
-        "https://livenex.online/users/youtubeAuth"
-      );
+      window.open("https://livenex.online/users/youtubeAuth");
 
       const messageListener = async (event) => {
-        console.log("event at youtube is ",event)
         if (event.origin === "https://livenex.online") {
           const response = event.data;
-          console.log("response from youtube live stream ", response);
           if (response.message === "AuthenticationSuccessful") {
             const authorizeToken = response.data.authorizeToken;
             setYoutubeAccessToken(authorizeToken);
             toast.info("youtube added successffull");
             window.removeEventListener("message", messageListener);
-          }
-          else{
+          } else {
             toast.error("you are not allowed  for live streaming");
           }
         }
@@ -271,7 +264,7 @@ export default function Modal() {
                     )}
                   </div>
                 </div>
-               
+
                 {youtubeTD ? (
                   <div className="relative m-2 p-2">
                     <label className="m-2 p-2 text-slate-500 text-lg leading-relaxed">
