@@ -151,7 +151,7 @@ const VideoStreaming = () => {
 
 
   const socket =
-    (io("ws://3.108.88.80/3100"),
+    io("ws://3.108.88.80/3100",
     {
       transports: ["websocket"],
       query: {

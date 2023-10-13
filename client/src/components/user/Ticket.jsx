@@ -17,10 +17,10 @@ const Ticket = () => {
   const [viewTicket,setViewTicket] = useState(false);
   const [ticketDatas,setTicketData] = useState(null);
    if(typeof userInfo.deatils === String){
-    setEmail(userInfo.deatils)
+    setEmail(userInfo?.deatils)
   } 
   else{
-    setEmail(userInfo.deatils.email)
+    setEmail(userInfo?.deatils?.email)
   }
 
   useEffect(() => {
