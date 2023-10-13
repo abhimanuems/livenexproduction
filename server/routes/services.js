@@ -74,4 +74,5 @@ service.get("/subscriptionslist", protect, viewSubscribers);
 service.get("/deleteRTMPURLS", protect, deleteRTMPURLS);
 
 service.get("/endYT", protect, YTendStream);
+
 export default service;

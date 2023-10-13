@@ -93,7 +93,6 @@ export default function Modal() {
         console.log("event at facebook");
         if (event.origin === "https://livenex.online") {
           const response = event.data;
-          console.log("face book auth data us ", event);
           console.log("facebook auth response is ", response);
           authWindow.close();
           window.removeEventListener("message", messageListener);
