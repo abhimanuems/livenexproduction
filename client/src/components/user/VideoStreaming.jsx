@@ -30,7 +30,7 @@ import {
 } from "../../slices/userApiSlice.js";
 import { useDispatch } from "react-redux";
 import { clearRTMPURLS } from "../../slices/userDetails.js";
-import Chat from "../user/Chat.jsx"
+import Chat from "../user/Chat.jsx";
 import useInterval from "../../utilis/useInterval.js";
 
 const VideoStreaming = () => {
@@ -147,9 +147,6 @@ const VideoStreaming = () => {
     }
   };
 
- 
-
-
   const socket = io("wss://livenex.shop:3100", {
     transports: ["websocket"],
     query: {
@@ -166,7 +163,6 @@ const VideoStreaming = () => {
     }
     recorderInit();
     setActive(true);
-
   };
 
   const recorderInit = () => {
@@ -245,7 +241,6 @@ const VideoStreaming = () => {
     stopRecording();
     dispatch(clearRTMPURLS());
     deleteRTMPURL();
-    
   };
 
   const sendComment = async () => {
@@ -311,7 +306,7 @@ const VideoStreaming = () => {
             ref={videoRef}
             autoPlay
             playsInline
-            muted={!isCameraActive} 
+            muted={!isCameraActive}
           />
         </div>
         <div className="flex justify-center mt-1">
