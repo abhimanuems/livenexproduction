@@ -95,9 +95,9 @@ export default function Modal() {
 
   const facebook = () => {
     try {
-      if(!pro){
+      if (!isPro) {
         toast.info("subscribe to continue");
-        return
+        return;
       }
       const authWindow = window.open(
         "https://livenex.online/users/facebookauth"
@@ -124,7 +124,7 @@ export default function Modal() {
   };
   const youtube = () => {
     try {
-       if (!pro) {
+       if (!isPro) {
          toast.info("subscribe to continue");
          return;
        }
