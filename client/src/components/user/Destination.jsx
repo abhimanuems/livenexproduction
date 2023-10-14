@@ -87,18 +87,18 @@ export default function Modal() {
     }
   }, [isFb, isYoutube, youtubeTD]);
 
-  useEffect(()=>{
-    subscriptionAPI().unwrap().then((res)=>{
-      setPro(res)
-    }).catch((err)=>console.error(err));
-  })
+  // useEffect(()=>{
+  //   subscriptionAPI().unwrap().then((res)=>{
+  //     setPro(res) 
+  //   }).catch((err)=>console.error(err));
+  // },[isPro])
 
   const facebook = () => {
     try {
-      if (!isPro) {
-        toast.info("subscribe to continue");
-        return;
-      }
+      // if (!isPro) {
+      //   toast.info("subscribe to continue");
+      //   return;
+      // }
       const authWindow = window.open(
         "https://livenex.online/users/facebookauth"
       );
@@ -124,10 +124,10 @@ export default function Modal() {
   };
   const youtube = () => {
     try {
-       if (!isPro) {
-         toast.info("subscribe to continue");
-         return;
-       }
+      //  if (!isPro) {
+      //    toast.info("subscribe to continue");
+      //    return;
+      //  }
       window.open("https://livenex.online/users/youtubeAuth");
 
       const messageListener = async (event) => {
