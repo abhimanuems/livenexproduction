@@ -151,6 +151,7 @@ const VideoStreaming = () => {
     "https://mytradingzone.site/",
     {
       path: "/socket.io",
+      withCredentials: true,
     },
     {
       transports: ["websocket"],
