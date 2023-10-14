@@ -147,20 +147,16 @@ const VideoStreaming = () => {
     }
   };
 
-  const socket = io(
-    "https://mytradingzone.site/",
-    {
-      path: "/socket.io",
-      withCredentials: true,
-    },
-    {
-      transports: ["websocket"],
-      query: {
-        rtmpUrlYoutube: rtmpurlYoutube,
-        rtmUrlFaceBook: rtmpUrlFb,
-      },
-    }
-  );
+const socket = io("https://mytradingzone.site/", {
+  path: "/socket.io",
+  withCredentials: true,
+  transports: ["websocket"],
+  query: {
+    rtmpUrlYoutube: rtmpurlYoutube,
+    rtmUrlFaceBook: rtmpUrlFb,
+  },
+});
+
 
   const handleStartRecording = () => {
     if (!socket) {
