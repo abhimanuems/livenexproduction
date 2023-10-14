@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSubscriptionMutation } from "../../slices/userApiSlice";
 import { clearRTMPURLS } from "../../slices/userDetails.js";
 import Destination from "../user/Destination";
-import { toast } from "react-toastify";
+
 
 const Body = () => {
   const navigate = useNavigate();
@@ -29,16 +29,8 @@ const Body = () => {
   }, []);
 
   const handleModal = () => {
-    if(pro)
-    { 
-        return true;
-    }else{
-      toast.error("subscribe to continue")
-    }
-  
-
+    return true;
   };
- 
 
   return (
     <div className="bg-white w-5/6 p-4">

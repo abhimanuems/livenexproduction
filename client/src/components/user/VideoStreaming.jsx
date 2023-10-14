@@ -147,17 +147,19 @@ const VideoStreaming = () => {
     }
   };
 
-  const socket = io("https://livenex.shop",
-  { 
-    path: "/socket.io"
-  },
-  {
-    transports: ["websocket"],
-    query: {
-      rtmpUrlYoutube: rtmpurlYoutube,
-      rtmUrlFaceBook: rtmpUrlFb,
+  const socket = io(
+    "https://mytradingzone.site/",
+    {
+      path: "/socket.io",
     },
-  });
+    {
+      transports: ["websocket"],
+      query: {
+        rtmpUrlYoutube: rtmpurlYoutube,
+        rtmUrlFaceBook: rtmpUrlFb,
+      },
+    }
+  );
 
   const handleStartRecording = () => {
     if (!socket) {

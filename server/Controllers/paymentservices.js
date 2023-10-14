@@ -89,7 +89,6 @@ const successFunction = async (req, res) => {
 const checkSubscription =async(req,res)=>{
   try{
     const subscription = await User.findOne({ _id: req.userEmail });
-    console.log(subscription);
     let subscribedDate = subscription?.razorpayDetails?.startDate;
     const today = new Date();
     subscribedDate?.setDate(subscribedDate?.getDate() + 28);

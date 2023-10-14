@@ -11,7 +11,9 @@ import {
   useRtmpUrlFBMutation,
   useRtmpUrlYoutubeMutation,
   useYoutubeTokenMutation,
+  useSubscriptionMutation,
 } from "../../slices/userApiSlice";
+
 
 export default function Modal() {
   const [showModal, setShowModal] = React.useState(false);
@@ -20,9 +22,11 @@ export default function Modal() {
   const [isYoutube, SetYoutube] = useState(false);
   const [isAdddestination, setDestination] = useState(true);
   const [youTubeAccessToken, setYoutubeAccessToken] = useState(null);
+  const [isPro,setPro] = useState(null);
   const navigate = useNavigate();
   const [fbToken] = useFacebookAccessTokenMutation();
-  const [youtubeToken] = useYoutubeTokenMutation("");
+  const [youtubeToken] = useYoutubeTokenMutation();
+  const [subscriptionAPI] = useSubscriptionMutation();
   const dispatch = useDispatch();
   const [rtmpFB] = useRtmpUrlFBMutation();
   const [rtmpYoutube] = useRtmpUrlYoutubeMutation();
@@ -83,8 +87,18 @@ export default function Modal() {
     }
   }, [isFb, isYoutube, youtubeTD]);
 
+  useEffect(()=>{
+    subscriptionAPI().unwrap().then((res)=>{
+      setPro(res)
+    }).catch((err)=>console.error(err));
+  })
+
   const facebook = () => {
     try {
+      if(!pro){
+        toast.info("subscribe to continue");
+        return
+      }
       const authWindow = window.open(
         "https://livenex.online/users/facebookauth"
       );
@@ -110,6 +124,10 @@ export default function Modal() {
   };
   const youtube = () => {
     try {
+       if (!pro) {
+         toast.info("subscribe to continue");
+         return;
+       }
       window.open("https://livenex.online/users/youtubeAuth");
 
       const messageListener = async (event) => {
