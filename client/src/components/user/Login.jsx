@@ -27,8 +27,7 @@ export default function Login() {
     try {
       const response = await login({ email, password }).unwrap();
       if (response.message) {
-        console.log(response)
-        dispatch(setCredentials({ deatils :response.user }));
+        dispatch(setCredentials({ deatils :response.user.email }));
         navigate("/");
         toast.error(response);
       } else if (response.error) {

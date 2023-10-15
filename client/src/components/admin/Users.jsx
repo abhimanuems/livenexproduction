@@ -23,7 +23,7 @@ const Users = () => {
         const options = { year: "numeric", month: "long", day: "numeric" };
         return new Intl.DateTimeFormat("en-US", options).format(date);
       }
-  return (
+  return userslist?.length ? (
     <div className=" w-5/6 bg-gray-100">
       <div className="bg-gray-100 text-center mt-4">
         <h1 className="text-[#19376D] text-xl font-bold mt-3">User List</h1>
@@ -83,7 +83,14 @@ const Users = () => {
         </div>
       </div>
     </div>
-  );
+  ): (
+      <div className="p-4 text-center">
+        <h2 className="text-lg font-semibold mb-2">No Users</h2>
+        <div className="bg-white  p-6 text-center">
+          <p className="text-center text-red-500">No items to display.</p>
+        </div>
+      </div>
+    );
 }
 
 export default Users

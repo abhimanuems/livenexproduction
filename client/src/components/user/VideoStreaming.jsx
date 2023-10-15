@@ -32,7 +32,6 @@ import { useDispatch } from "react-redux";
 import { clearRTMPURLS } from "../../slices/userDetails.js";
 import Chat from "../user/Chat.jsx";
 import useInterval from "../../utilis/useInterval.js";
-import cookies from "js-cookie";
 
 const VideoStreaming = () => {
   const videoRef = useRef(null);
@@ -68,13 +67,13 @@ const VideoStreaming = () => {
   useEffect(() => {
     const getRTMPYTFB = async () => {
       const rtmpurlYT = await rtmpYoutube().unwrap();
-      if (rtmpurlYT == null) {
+      if (rtmpurlYT === null) {
         getRTMPYTFB();
       } else {
         setyoutubeRTMP(rtmpurlYT);
       }
       const rtmpFBURL = await RTMPFB().unwrap();
-      if (rtmpFBURL == null) {
+      if (rtmpFBURL === null) {
         getRTMPYTFB();
       } else {
         setRtmpFb(rtmpFBURL);
@@ -148,17 +147,15 @@ const VideoStreaming = () => {
     }
   };
 
-  const jwt = cookies.get();
-  console.log("jwt is ",jwt)
+
 
   const socket = io("https://ffmpegserverlivenex.shop", {
     path: "/socket.io",
-    withCredentials: false,
+    withCredentials: true,
     transports: ["websocket"],
     query: {
       rtmpUrlYoutube: rtmpurlYoutube,
       rtmUrlFaceBook: rtmpUrlFb,
-      jwt: jwt,
     },
   });
 
@@ -238,7 +235,7 @@ const VideoStreaming = () => {
   };
 
   const leaveStudio = () => {
-    navigate("/");
+   
     socket.emit("client-stop-ffmpeg");
     if (stream) {
       const tracks = stream.getTracks();
@@ -248,6 +245,7 @@ const VideoStreaming = () => {
     stopRecording();
     dispatch(clearRTMPURLS());
     deleteRTMPURL();
+    navigate("/");
   };
 
   const sendComment = async () => {
@@ -401,9 +399,9 @@ const VideoStreaming = () => {
             </div>
           </div>
         </div>
-        {/* <h2 className="text-2xl font-semibold mb-4 mt-2">Comments</h2> */}
+      
         <div className=" h-4/6 mt-0">
-          {/* <div className="flex items-center mb-2"></div> */}
+        
         </div>
 
         <div className="flex items-center mt-24">

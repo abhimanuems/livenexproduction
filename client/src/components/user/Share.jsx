@@ -15,7 +15,7 @@ const Share = () => {
         <p className="m-2 p-2">
           ✨ No complicated downloads — livestream directly from your browser.
         </p>
-        <p className="m-2 p-2">✨ Start your first stream in &lt; 1 minutes</p>
+        <p className="m-2 p-2">✨ Start your first stream in &lt; 15 seconds</p>
       </div>
       <div className="mt-8 ml-96 ">
         <div className="flex flex-wrap -mx-4">

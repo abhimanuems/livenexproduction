@@ -176,7 +176,7 @@ import {
               <div className="bg-green-600 rounded-3xl grid grid-rows-5 gap-1 drop-shadow-xl">
                 <div className=" row-span-2 flex items-center px-3">
                   <h1 className="text-2xl font-medium text-white">
-                    Active Subcribtions
+                    Active Subscriptions
                   </h1>
                 </div>
                 <div className=" row-span-3 flex items-center justify-end">

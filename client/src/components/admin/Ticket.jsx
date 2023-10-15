@@ -27,7 +27,7 @@ const Ticket = () => {
 
 
    };
-  return (
+  return ticketData?.length ? (
     <div className="container mx-auto p-6">
       {!selectedTicket && !isReply ? (
         <>
@@ -78,9 +78,7 @@ const Ticket = () => {
                           )}
                         </td>
                         <td className="px-6 py-4">
-                          {ticket.status ? (
-                            null
-                          ) : (
+                          {ticket.status ? null : (
                             <button
                               onClick={() => handleReplyClick(ticket, item)}
                               class="bg-gray-300 hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
@@ -107,6 +105,13 @@ const Ticket = () => {
           id={selectedTicket._id}
         />
       )}
+    </div>
+  ) : (
+    <div className="p-4 text-center">
+      <h2 className="text-lg font-semibold mb-2">No Tickets</h2>
+      <div className="bg-white  p-6 text-center">
+        <p className="text-center text-red-500">No items to display.</p>
+      </div>
     </div>
   );
 }
