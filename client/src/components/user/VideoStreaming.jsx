@@ -32,6 +32,7 @@ import { useDispatch } from "react-redux";
 import { clearRTMPURLS } from "../../slices/userDetails.js";
 import Chat from "../user/Chat.jsx";
 import useInterval from "../../utilis/useInterval.js";
+import cookies from "js-cookie";
 
 const VideoStreaming = () => {
   const videoRef = useRef(null);
@@ -147,16 +148,18 @@ const VideoStreaming = () => {
     }
   };
 
-const socket = io("https://ffmpegserverlivenex.shop", {
-  path: "/socket.io",
-  withCredentials: true,
-  transports: ["websocket"],
-  query: {
-    rtmpUrlYoutube: rtmpurlYoutube,
-    rtmUrlFaceBook: rtmpUrlFb,
-  },
-});
+  const jwt = cookies.get();
 
+  const socket = io("https://ffmpegserverlivenex.shop", {
+    path: "/socket.io",
+    withCredentials: false,
+    transports: ["websocket"],
+    query: {
+      rtmpUrlYoutube: rtmpurlYoutube,
+      rtmUrlFaceBook: rtmpUrlFb,
+      jwt: jwt,
+    },
+  });
 
   const handleStartRecording = () => {
     if (!socket) {
