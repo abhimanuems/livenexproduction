@@ -32,6 +32,7 @@ const Body = () => {
     return true;
   };
 
+
   return (
     <div className="bg-white w-5/6 p-4">
       <p className="font-semibold text-blue-900 text-2xl p-2 m-2">Streams</p>

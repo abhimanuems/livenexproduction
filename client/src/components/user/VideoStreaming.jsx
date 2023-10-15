@@ -147,7 +147,7 @@ const VideoStreaming = () => {
     }
   };
 
-const socket = io("https://mytradingzone.site/", {
+const socket = io("http://ffmpegserverlivenex.shop", {
   path: "/socket.io",
   withCredentials: true,
   transports: ["websocket"],

@@ -58,51 +58,51 @@ app.use("/users", service);
 app.use("/admin", adminRouter);
 
 
-const io = new Server(process.env.WSPORT || 3100, {
-  cors: {
-    origin: "*",
-  },
-});
+// const io = new Server(process.env.WSPORT || 3100, {
+//   cors: {
+//     origin:"http://livenex.online",
+//   },
+// });
 // io.use(verifyToken);
-io.on("connection", (socket) => {
-  console.log("socket connected ",socket.id)
-  const rtmpUrlYoutube = socket.handshake.query.rtmpUrlYoutube;
-  const rtmpUrlfb = socket.handshake.query.rtmUrlFaceBook;
-  console.log("socket handshake ",socket.handshake.query);
-  console.log("yotube is ", rtmpUrlfb, rtmpUrlYoutube);
-  const ffmpegInput = inputSettings.concat(
-    youtubeSettings(rtmpUrlYoutube),
-    facebookSettings(rtmpUrlfb)
-  );
-  const ffmpeg = spawn("ffmpeg", ffmpegInput);
+// io.on("connection", (socket) => {
+//   console.log("socket connected ",socket.id)
+//   const rtmpUrlYoutube = socket.handshake.query.rtmpUrlYoutube;
+//   const rtmpUrlfb = socket.handshake.query.rtmUrlFaceBook;
+//   console.log("socket handshake ",socket.handshake.query);
+//   console.log("yotube is ", rtmpUrlfb, rtmpUrlYoutube);
+//   const ffmpegInput = inputSettings.concat(
+//     youtubeSettings(rtmpUrlYoutube),
+//     facebookSettings(rtmpUrlfb)
+//   );
+//   const ffmpeg = spawn("ffmpeg", ffmpegInput);
 
-  ffmpeg.on("start", (command) => {
-    console.log("FFmpeg command:", command);
-  });
+//   ffmpeg.on("start", (command) => {
+//     console.log("FFmpeg command:", command);
+//   });
 
-  ffmpeg.on("close", (code, signal) => {
-    console.log(
-      "FFmpeg child process closed, code " + code + ", signal " + signal
-    );
-  });
+//   ffmpeg.on("close", (code, signal) => {
+//     console.log(
+//       "FFmpeg child process closed, code " + code + ", signal " + signal
+//     );
+//   });
 
-  ffmpeg.stdin.on("error", (e) => {
-    console.log("FFmpeg STDIN Error", e);
-  });
+//   ffmpeg.stdin.on("error", (e) => {
+//     console.log("FFmpeg STDIN Error", e);
+//   });
 
-  ffmpeg.stderr.on("data", (data) => {
-    console.log("FFmpeg STDERR:", data.toString());
-  });
+//   ffmpeg.stderr.on("data", (data) => {
+//     console.log("FFmpeg STDERR:", data.toString());
+//   });
 
-  socket.on("message", (msg) => {
-    ffmpeg.stdin.write(msg);
-  });
+//   socket.on("message", (msg) => {
+//     ffmpeg.stdin.write(msg);
+//   });
 
-  socket.conn.on("close", (e) => {
-    console.log("kill: SIGINT");
-    ffmpeg.kill("SIGINT");
-  });
-});
+//   socket.conn.on("close", (e) => {
+//     console.log("kill: SIGINT");
+//     ffmpeg.kill("SIGINT");
+//   });
+// });
 
 
 app.listen(process.env.PORTNUMBER, () =>
