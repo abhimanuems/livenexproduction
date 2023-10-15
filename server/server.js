@@ -27,7 +27,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://livenex.online/",
+    origin: "https://livenex.online/",
     methods: "*",
     credentials: true,
   })
