@@ -149,6 +149,7 @@ const VideoStreaming = () => {
   };
 
   const jwt = cookies.get();
+  console.log("jwt is ",jwt)
 
   const socket = io("https://ffmpegserverlivenex.shop", {
     path: "/socket.io",
