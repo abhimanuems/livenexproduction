@@ -59,11 +59,9 @@ const getBroadCastId = async (
                 "youtube.broadcastId": broadcastId,
               },
             }
-          ).then((res) => {
-            console.log("broadcastid is database submision is ", res);
-          });
+          )
 
-          const stream_data = createYoutubeStreams(
+         createYoutubeStreams(
             title,
             description,
             accessToken,
@@ -119,14 +117,7 @@ const createYoutubeStreams = async (
       .then(async (res) => {
         const { ingestionAddress, streamName } = res.data.cdn.ingestionInfo;
         const id = res.data.id;
-        console.log(
-          "ingestionAddress, streamName",
-          streamName,
-          ingestionAddress
-        );
-
         const youtubeRTMURL = ingestionAddress + "/" + streamName;
-        console.log("youtube rmtp url", youtubeRTMURL);
         await User.updateOne(
           { _id: userId },
           { $set: { "youtube.rtmpUrl": youtubeRTMURL } }
