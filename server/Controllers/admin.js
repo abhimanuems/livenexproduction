@@ -173,6 +173,7 @@ const logout = async(req,res)=>{
     res.status(200).json("admin logged out successfully");
   }catch(err){
     console.error(err.message);
+      res.status(400).json("internal error");
   }
 }
 
