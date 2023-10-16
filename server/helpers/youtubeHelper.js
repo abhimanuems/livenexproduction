@@ -61,7 +61,7 @@ const getBroadCastId = async (
               },
             }
           )
-           response.status(200).json({ message: "streaming YT done" });
+          
 
          createYoutubeStreams(
             title,
@@ -176,6 +176,7 @@ const bindYoutubeBroadcastToStream = async (
       }
     );
     console.log("Live Chat ID: from binde streaming", liveChatId);
+     res.status(200).json({ message: "streaming YT done" });
     await startStreaming(youtubeBroadcastId, youtubeAccessToken, userId);
    
 
