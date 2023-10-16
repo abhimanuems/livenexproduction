@@ -44,6 +44,7 @@ const VideoStreaming = () => {
   const [isShareScreen, SetShareScreen] = useState(false);
   const navigate = useNavigate();
   const [stream, setStream] = useState(null);
+  const [isStream,setStreams] = useState(true)
   const [rtmpUrlFb, setRtmpFb] = useState(null);
   const [rtmpurlYoutube, setyoutubeRTMP] = useState(null);
   const [fbliveComments, setFbLiveComments] = useState(null);
@@ -312,7 +313,7 @@ const VideoStreaming = () => {
             autoPlay
             playsInline
             muted={!isCameraActive}
-            style={{transform:"scaleX(-1)"}}
+            style={{ transform: "scaleX(-1)" }}
           />
         </div>
         <div className="flex justify-center mt-1">
@@ -377,12 +378,22 @@ const VideoStreaming = () => {
 
       <div className="w-3/12 p-4 bg-white">
         <div className="h-1/6">
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-            onClick={handleStartRecording}
-          >
-            Go Live
-          </button>
+          {isStream ? (
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+              onClick={handleStartRecording}
+            >
+              Go Live
+            </button>
+          ) : (
+            <button
+              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+              onClick={leaveStudio}
+            >
+              End Live
+            </button>
+          )}
+
           <div className="mt-3">
             <p className="text-slate-500">
               Live viewer's comments show up here
@@ -400,12 +411,10 @@ const VideoStreaming = () => {
             </div>
           </div>
         </div>
-      
-        <div className=" h-4/6 mt-0">
-        
-        </div>
 
-        <div className="flex items-center mt-24">
+        <div className=" h-4/6 mt-0"></div>
+
+        <div className="flex items-center mt-24 overflow-y-auto">
           <input
             type="text"
             placeholder="Type your comment here..."
