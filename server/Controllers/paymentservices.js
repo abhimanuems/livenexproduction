@@ -49,9 +49,9 @@ const successFunction = async (req, res) => {
 
     if (digest !== razorpaySignature)
       return res.status(400).json({ msg_error: "Transaction not legit!" });
-   const startDate = Date.now();
-   const endDate = new Date(startDate); 
-   endDate.setDate(endDate.getDate() + 28);
+    const startDate = Date.now();
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 28);
     const razorpayDetails = {
       endDate: endDate,
       orderId: razorpayOrderId,
@@ -61,14 +61,12 @@ const successFunction = async (req, res) => {
       startDate: Date.now(),
     };
 
-
     try {
       const user = await User.findOneAndUpdate(
         {
           email: req.body.email,
         },
-        { $set: { razorpayDetails: razorpayDetails } },
-        
+        { $set: { razorpayDetails: razorpayDetails } }
       );
     } catch (err) {
       console.log(err.message);
@@ -86,56 +84,55 @@ const successFunction = async (req, res) => {
   }
 };
 
-const checkSubscription =async(req,res)=>{
-  try{
+const checkSubscription = async (req, res) => {
+  try {
     const subscription = await User.findOne({ _id: req.userEmail });
     let subscribedDate = subscription?.razorpayDetails?.startDate;
     const today = new Date();
     subscribedDate?.setDate(subscribedDate?.getDate() + 28);
     console.log(subscribedDate);
-    if (today <= subscribedDate) 
-      res.status(200).json(true);
-    else 
-    res.status(200).json(false);
-
-  }catch(err){
-    console.error(err.message)
+    if (today <= subscribedDate) res.status(200).json(true);
+    else res.status(200).json(false);
+  } catch (err) {
+    console.error(err.message);
   }
-}
+};
 
-const submitTickets = async(req,res)=>{
-  try{
-    await User.updateOne({_id:req.userEmail}, { $push: { tickets: req.body } })
+const submitTickets = async (req, res) => {
+  try {
+    await User.updateOne(
+      { _id: req.userEmail },
+      { $push: { tickets: req.body } }
+    )
       .then((response) => {
         res.status(200).json({ message: "successful submit the ticket" });
       })
       .catch((err) => {
         res.status(400).json({ error: "ticket failed" });
       });
-    
-  }catch(err){
-    console.error("error at submitting tickets",err);
-    res.status(400).json({err})
+  } catch (err) {
+    console.error("error at submitting tickets", err);
+    res.status(400).json({ err });
   }
-}
+};
 
-const getTicketData =async (req,res)=>{
-  try{
+const getTicketData = async (req, res) => {
+  try {
     const userId = req.userEmail;
-    User.find({_id:userId},{"tickets":1,"_id":0}).then((response)=>{
-      console.log(response)
-      res.status(200).json({ response: response[0]?.tickets });
-    }).catch((err)=>{
-      console.error(err)
-      res.status(400).json({err})
-    })
-
-
-  }catch(err){
-    console.error("error at fetching tickets",err);
-    res.status(400).json({error:"error at fetching datas"})
+    User.find({ _id: userId }, { tickets: 1, _id: 0 })
+      .then((response) => {
+        console.log(response);
+        res.status(200).json({ response: response[0]?.tickets });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(400).json({ err });
+      });
+  } catch (err) {
+    console.error("error at fetching tickets", err);
+    res.status(400).json({ error: "error at fetching datas" });
   }
-}
+};
 
 export {
   razorpay,

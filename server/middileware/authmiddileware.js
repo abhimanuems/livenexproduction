@@ -39,34 +39,9 @@ const adminAuthProtect = async (req, res, next) => {
   }
 };
 
-const verifyToken = (socket, next) => {
-  console.log("socket cookie is ",socket.handshake);
-
-  const token = extractJwtToken(socket.handshake.headers.cookie);
-  if (!token) {
-    return next(new Error("Authentication error"));
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
-    if (err) {
-      return next(new Error("Authentication error"));
-    }
-    socket.user = decoded;
-    next();
-  });
-};
-
-function extractJwtToken(cookieString) {
-  const cookies = cookieString?.split("; ");
-  const jwtCookie = cookies?.find((cookie) => cookie.startsWith("jwt="));
-
-  if (jwtCookie) {
-    const token = jwtCookie.split("=")[1];
-    return token;
-  }
-
-  return null;
-}
 
 
-export { protect, adminAuthProtect, verifyToken };
+
+
+
+export { protect, adminAuthProtect };

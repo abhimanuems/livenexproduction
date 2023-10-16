@@ -92,18 +92,11 @@ const getFbComments = async (req, res) => {
     const result = await User.findOne({ _id: req.userEmail });
     const accessToken = result.facebook.accessToken;
     const liveVideoId = result.facebook.liveVideoId;
-    console.log("access token and live video is is ", accessToken, liveVideoId);
     await axios
       .get(
         `https://graph.facebook.com/${liveVideoId}/comments?access_token=${accessToken}`
       )
       .then((response) => {
-        console.log("res data is", response.data);
-        response.data.data.forEach((comment) => {
-          console.log("User ID:", comment.from);
-          console.log("User Name:", comment?.from?.name);
-          console.log("------------------------");
-        });
         res.status(200).json({ facebookMessage: response.data });
       })
 
@@ -130,18 +123,7 @@ const postFBcomments = async (req, res) => {
   try {
     const result = await User.findOne({ _id: req.userEmail });
     const accessToken = result.facebook.accessToken;
-    //  const response = await axios.post(
-    //    `https://graph.facebook.com/v12.0/me/live_videos`,
-    //    null,
-    //    {
-    //      params: {
-    //        access_token: accessToken,
-    //        status: "LIVE_NOW",
-    //      },
-    //    }
-    //  );
-
-    //const liveVideoId = response.data.id;
+   
     const liveVideoId = "122119841660032468";
 
     const commentData = {
@@ -153,13 +135,13 @@ const postFBcomments = async (req, res) => {
     axios.post(url, commentData);
   } catch (err) {
     if (err.response) {
-      // If the request was made and the server responded with an error
+      
       console.error("Response Error:", err.response.data);
     } else if (err.request) {
-      // If the request was made but no response was received
+     
       console.error("Request Error:", err.request);
     } else {
-      // Something else happened while setting up the request
+      
       console.error("Error:", err.message);
     }
   }
