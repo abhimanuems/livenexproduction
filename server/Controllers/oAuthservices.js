@@ -73,7 +73,7 @@ const accessTokenYoutube = async (req, res) => {
     )
       .then((response) => {
         getBroadCastId(res, accessToken, id, youtube, title, description);
-        res.status(200).json({ response });
+     
       })
       .catch((err) => {
         console.error(err.message);

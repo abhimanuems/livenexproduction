@@ -46,14 +46,19 @@ export default function Modal() {
       }
       if (isYoutube) {
         if (youTubeAccessToken) {
-          await youtubeToken({
+        await youtubeToken({
             authorizeToken: youTubeAccessToken,
             titleDescription: { title, description },
-          }).unwrap();
-
+          }).unwrap().then(async(res)=>{
+            toast.info("YT done");
           const rtmpurlYoutube = await rtmpYoutube().unwrap();
           dispatch(setyoutubeRTMPURL({ rtmpurlYoutube }));
-          toast.info("rtmp url youtube is done", rtmpurlYoutube);
+          }).catch((err)=>{
+            toast.info("you are the subscribed to live streaming");
+            navigate('/');
+            return
+          })
+
         }
       }
       if (isFb || isYoutube) {

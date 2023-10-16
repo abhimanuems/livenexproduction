@@ -68,7 +68,8 @@ const getBroadCastId = async (
             description,
             accessToken,
             broadcastId,
-            id
+            id,
+            response
           );
         }
       }
@@ -83,7 +84,8 @@ const createYoutubeStreams = async (
   youtubeBroadcastDescription,
   authorizeToken,
   broadcastId,
-  userId
+  userId,
+  response
 ) => {
   try {
     const data = {
@@ -129,7 +131,13 @@ const createYoutubeStreams = async (
           { _id: userId },
           { $set: { "youtube.rtmpUrl": youtubeRTMURL } }
         );
-        bindYoutubeBroadcastToStream(broadcastId, id, authorizeToken, userId);
+        bindYoutubeBroadcastToStream(
+          broadcastId,
+          id,
+          authorizeToken,
+          userId,
+          response
+        );
         return {
           id: res.data.id,
           youtubeDestinationUrl: ingestionAddress + "/" + streamName,
@@ -149,7 +157,8 @@ const bindYoutubeBroadcastToStream = async (
   youtubeBroadcastId,
   youtubeStreamId,
   youtubeAccessToken,
-  userId
+  userId,
+  res
 ) => {
   const config = {
     headers: {
@@ -175,6 +184,7 @@ const bindYoutubeBroadcastToStream = async (
     );
     console.log("Live Chat ID: from binde streaming", liveChatId);
     await startStreaming(youtubeBroadcastId, youtubeAccessToken, userId);
+    res.json(200).json({message:"streaming YT done"});
 
     return response.data;
   } catch (error) {
