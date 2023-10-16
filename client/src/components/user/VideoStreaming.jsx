@@ -312,6 +312,7 @@ const VideoStreaming = () => {
             autoPlay
             playsInline
             muted={!isCameraActive}
+            style={{transform:"scaleX(-1)"}}
           />
         </div>
         <div className="flex justify-center mt-1">
