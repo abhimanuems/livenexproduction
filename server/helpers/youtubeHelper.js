@@ -49,6 +49,7 @@ const getBroadCastId = async (
         if (err) {
           console.error(`Error creating live broadcast: ${err}`);
           response.status(403).json({ error: err });
+          return
         } else {
           const broadcastId = await res.data.id;
 
