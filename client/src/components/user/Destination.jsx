@@ -46,6 +46,7 @@ export default function Modal() {
       }
       if (isYoutube) {
         if (youTubeAccessToken) {
+          let flag =0;
         await youtubeToken({
             authorizeToken: youTubeAccessToken,
             titleDescription: { title, description },
@@ -54,10 +55,13 @@ export default function Modal() {
           const rtmpurlYoutube = await rtmpYoutube().unwrap();
           dispatch(setyoutubeRTMPURL({ rtmpurlYoutube }));
           }).catch((err)=>{
-            toast.info("you are the subscribed to live streaming");
+            toast.info("you are not the subscribed to live streaming");
+               flag=1;
+          })
+          if(flag==1){
             navigate('/');
             return
-          })
+          }
 
         }
       }
