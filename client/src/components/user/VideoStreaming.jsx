@@ -151,18 +151,6 @@ const VideoStreaming = () => {
       console.error(err.message);
     }
   };
-  function getCookie(cookieName) {
-    const cookies = document.cookie
-    // for (let i = 0; i < cookies.length; i++) {
-    //   const cookie = cookies[i].trim();
-    //   if (cookie.startsWith(cookieName + "=")) {
-    //     return decodeURIComponent(cookie.substring(cookieName.length + 1));
-    //   }
-    // }
-    return cookies;
-  }
-
-  const userCookie = getCookie("jwt")
 
 
 
@@ -171,7 +159,6 @@ const VideoStreaming = () => {
     query: {
       rtmpUrlYoutube: rtmpurlYoutube,
       rtmUrlFaceBook: rtmpUrlFb,
-      userCookie,
     },
     withCredentials: true,
   });
@@ -396,7 +383,7 @@ const VideoStreaming = () => {
       </div>
 
       <div className="w-3/12 p-4 bg-white">
-        <div className="h-1/6 ">
+        <div className="h-1/6">
           {isStream ? (
             <button
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
@@ -413,7 +400,7 @@ const VideoStreaming = () => {
             </button>
           )}
 
-          <div className="mt-3 overflow-y-auto">
+          <div className="mt-3 ">
             <p className="text-slate-500">
               Live viewer's comments show up here
               {rtmpUrlFb ? (
@@ -425,7 +412,7 @@ const VideoStreaming = () => {
               ) : null}
             </p>
 
-            <div className="h-72 ">
+            <div className="h-72 overflow-y-auto">
               <Chat comments={[fbliveComments, ytLivecomments]} />
             </div>
           </div>

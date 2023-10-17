@@ -207,7 +207,7 @@ const streamingDetails = async(req,res)=>{
     const { title, destinations } = req.body;
     const date = Date.now();
     await User.updateOne(
-     { _id: userEmail },
+     { _id:  req.userEmail },
      {
        $push: {
          tickets: {
