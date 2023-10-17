@@ -28,7 +28,7 @@ const Body = () => {
     }
     dispatch(clearRTMPURLS());
     setPro(false)
-  }, []);
+  }, [pro]);
 
   const handleModal = () => {
     return true;

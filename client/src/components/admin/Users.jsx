@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 const Users = () => {
   const [getUserAPI] = useUserslistMutation();
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 10;
+  const itemsPerPage = 7;
   const [userslist, setUsersList] = useState([]);
   useEffect(() => {
     getUsersList();
@@ -94,13 +94,15 @@ const Users = () => {
                     ))
                   : null}
               </table>
-              <ReactPaginate
-                className="ml-10"
-                previousLabel={"Previous"}
-                nextLabel={"Next"}
-                pageCount={Math.ceil(userslist.length / itemsPerPage)}
-                onPageChange={handlePageChange}
-              />
+              <div className="mt-4 flex justify-center text-gray-700">
+                <ReactPaginate
+                  className="ml-10"
+                  previousLabel={"Previous"}
+                  nextLabel={"Next"}
+                  pageCount={Math.ceil(userslist.length / itemsPerPage)}
+                  onPageChange={handlePageChange}
+                />
+              </div>
             </div>
           </div>
         </div>
