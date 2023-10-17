@@ -179,7 +179,6 @@ const viewSubscribers = async (req, res) => {
 const YTendStream = async (req, res) => {
   try {
     const result = await User.findOne({ _id: req.userEmail });
-    console.log(result);
     const youtubeAccessToken = result.youtube.authorizeToken;
     const broadcastId = result.youtube.broadcastId;
     const response = await stopStreaming(youtubeAccessToken, broadcastId, res);
@@ -188,6 +187,45 @@ const YTendStream = async (req, res) => {
     console.error(err.message);
   }
 };
+const getStreamDetails = async(req,res)=>{
+  try{
+    const userId = req.userEmail;
+    User.find({ _id: userId }, { streams: 1, _id: 0 })
+      .then((response) => {
+        res.status(200).json({ response});
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(400).json({ err });
+      });
+  }catch(err){
+    res.status(400).json({err});
+  }
+}
+
+const streamingDetails = async(req,res)=>{
+  try{
+    const { title, destinations } = req.body;
+    const date = Date.now();
+   const response = await User.updateOne(
+     { _id: userEmail },
+     {
+       $push: {
+         tickets: {
+           title,
+           date,
+           platforms: destinations,
+         },
+       },
+     }
+   );
+   res.status(200).json({message: "added successfully"});
+
+  }catch(err){
+    console.error(err.message);
+    res.status(400).json({errMessage: "error occurs"});
+  }
+}
 
 export {
   oauthCallback,
@@ -199,4 +237,6 @@ export {
   YTviewCount,
   viewSubscribers,
   YTendStream,
+  streamingDetails,
+  getStreamDetails,
 };

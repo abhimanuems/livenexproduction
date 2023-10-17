@@ -125,6 +125,19 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: "get",
       }),
     }),
+    getPastStreams : builder.mutation({
+      query:()=>({
+        url :"users/streamdetails",
+        method: "get"
+      })
+    }),
+    streamDetails: builder.mutation({
+      query: (data) => ({
+        url: "users/streamdetails",
+        method: "post",
+        body:data
+      }),
+    }),
     logout: builder.mutation({
       query: () => ({
         url: "auth/logout",
@@ -154,5 +167,8 @@ export const {
   useFBviewCountMutation,
   useDeleteRTMPURLSMutation,
   useTicketMutation,
-  useTicketDataMutation
+  useTicketDataMutation,
+  useStreamDetailsMutation,
+  useGetPastStreamsMutation
+
 } = userApiSlice;

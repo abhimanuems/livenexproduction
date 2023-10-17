@@ -11,7 +11,7 @@ import {
   useRtmpUrlFBMutation,
   useRtmpUrlYoutubeMutation,
   useYoutubeTokenMutation,
-  useSubscriptionMutation,
+  useStreamDetailsMutation,
 } from "../../slices/userApiSlice";
 
 
@@ -22,14 +22,13 @@ export default function Modal() {
   const [isYoutube, SetYoutube] = useState(false);
   const [isAdddestination, setDestination] = useState(true);
   const [youTubeAccessToken, setYoutubeAccessToken] = useState(null);
-  const [isPro,setPro] = useState(null);
   const navigate = useNavigate();
   const [fbToken] = useFacebookAccessTokenMutation();
   const [youtubeToken] = useYoutubeTokenMutation();
-  const [subscriptionAPI] = useSubscriptionMutation();
   const dispatch = useDispatch();
   const [rtmpFB] = useRtmpUrlFBMutation();
   const [rtmpYoutube] = useRtmpUrlYoutubeMutation();
+  const [streamDetails] = useStreamDetailsMutation();
   const [youtubeTD, setYTTD] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -75,6 +74,14 @@ export default function Modal() {
           const rtmpUrl = await rtmpFB().unwrap();
           dispatch(setFbRTMPURL({ rtmpUrl }));
         }
+        const data = {
+          title,
+          destinations:{
+            "youtube":isYoutube,
+            "facebook" : isFb
+          }
+        }
+        await streamDetails(data).unwrap();
         navigate("/video");
       } else {
         toast.error("select atleast one destination");
@@ -96,18 +103,11 @@ export default function Modal() {
     }
   }, [isFb, isYoutube, youtubeTD]);
 
-  // useEffect(()=>{
-  //   subscriptionAPI().unwrap().then((res)=>{
-  //     setPro(res) 
-  //   }).catch((err)=>console.error(err));
-  // },[isPro])
+ 
 
   const facebook = () => {
     try {
-      // if (!isPro) {
-      //   toast.info("subscribe to continue");
-      //   return;
-      // }
+     
       const authWindow = window.open(
         "https://livenex.online/users/facebookauth"
       );
@@ -116,7 +116,6 @@ export default function Modal() {
         console.log("event at facebook");
         if (event.origin === "https://livenex.online") {
           const response = event.data;
-          console.log("facebook auth response is ", response);
           authWindow.close();
           window.removeEventListener("message", messageListener);
           if (response) {
@@ -133,10 +132,7 @@ export default function Modal() {
   };
   const youtube = () => {
     try {
-      //  if (!isPro) {
-      //    toast.info("subscribe to continue");
-      //    return;
-      //  }
+      
       window.open("https://livenex.online/users/youtubeAuth");
 
       const messageListener = async (event) => {
@@ -182,9 +178,9 @@ export default function Modal() {
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none w-9/12 my-6 mx-auto max-w-3xl">
             <div className="relative w-4/5 my-6 mx-auto max-w-3xl">
-              {/*content*/}
+             
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
+              
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-2xl font-semibold">
                     Select the live Stream Destinations
@@ -251,7 +247,6 @@ export default function Modal() {
                       </div>
                     </div>
 
-                    {/* Dropdown menu */}
                     {isMenuOpen && (
                       <div
                         className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"

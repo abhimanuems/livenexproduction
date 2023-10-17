@@ -45,7 +45,7 @@ const userSchema = mongoose.Schema(
       {
         title: String,
         startTime: Date,
-        endTime: Date,
+        destinations: Array,
       },
     ],
   },

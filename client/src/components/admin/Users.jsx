@@ -95,14 +95,15 @@ const Users = () => {
                   : null}
               </table>
               <div className="mt-4 justify-center text-gray-700">
-                {userslist?.length > 8 ?  <ReactPaginate
-                  className="ml-10 flex"
-                  previousLabel={"Previous"}
-                  nextLabel={"Next"}
-                  pageCount={Math.ceil(userslist.length / itemsPerPage)}
-                  onPageChange={handlePageChange}
-                /> : null }
-               
+                {userslist?.length > 8 ? (
+                  <ReactPaginate
+                    className="ml-10 flex justify-center m-4"
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={Math.ceil(userslist.length / itemsPerPage)}
+                    onPageChange={handlePageChange}
+                  />
+                ) : null}
               </div>
             </div>
           </div>

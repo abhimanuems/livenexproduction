@@ -16,6 +16,8 @@ import {
   YTviewCount,
   viewSubscribers,
   YTendStream,
+  streamingDetails,
+  getStreamDetails,
 } from "../Controllers/oAuthservices.js";
 import { protect } from "../middileware/authmiddileware.js";
 import {
@@ -27,6 +29,7 @@ import {
   postFBcomments,
   FBviewCount,
   deleteRTMPURLS,
+
 } from "../Controllers/facebook.js";
 
 const service = Router();
@@ -74,5 +77,9 @@ service.get("/subscriptionslist", protect, viewSubscribers);
 service.get("/deleteRTMPURLS", protect, deleteRTMPURLS);
 
 service.get("/endYT", protect, YTendStream);
+
+service.get("/streamdetails",protect,getStreamDetails);
+
+service.post("/streamdetails",protect,streamingDetails)
 
 export default service;
