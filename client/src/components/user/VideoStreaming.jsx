@@ -155,13 +155,12 @@ const VideoStreaming = () => {
 
 
   const socket = io("https://ffmpegserverlivenex.shop", {
-    path: "/socket.io",
-    withCredentials: true,
     transports: ["websocket"],
     query: {
       rtmpUrlYoutube: rtmpurlYoutube,
       rtmUrlFaceBook: rtmpUrlFb,
     },
+    withCredentials: true,
   });
 
   const handleStartRecording = () => {
@@ -252,7 +251,7 @@ const VideoStreaming = () => {
     stopRecording();
     dispatch(clearRTMPURLS());
     deleteRTMPURL();
-    navigate("/");
+    navigate("/home");
     
   };
 
@@ -401,7 +400,7 @@ const VideoStreaming = () => {
             </button>
           )}
 
-          <div className="mt-3">
+          <div className="mt-3 ">
             <p className="text-slate-500">
               Live viewer's comments show up here
               {rtmpUrlFb ? (
@@ -413,7 +412,7 @@ const VideoStreaming = () => {
               ) : null}
             </p>
 
-            <div className="h-72">
+            <div className="h-72 overflow-y-auto">
               <Chat comments={[fbliveComments, ytLivecomments]} />
             </div>
           </div>
@@ -421,7 +420,7 @@ const VideoStreaming = () => {
 
         <div className=" h-4/6 mt-0"></div>
 
-        <div className="flex items-center mt-24 overflow-y-auto">
+        <div className="flex items-center mt-24 ">
           <input
             type="text"
             placeholder="Type your comment here..."

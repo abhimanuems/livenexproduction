@@ -20,9 +20,14 @@ const Body = () => {
   const [streamsAPI] = useGetPastStreamsMutation();
   useEffect(() => {
     if (!userInfo) {
-     const pdata =  streamsAPI().unwrap();
-     setData(pdata);
-     console.log("strea,ing ddata is ",pdata);
+       streamsAPI().unwrap().then((pdata)=>{
+          console.log("strea,ing ddata is ", pdata);
+        setData(pdata);
+       }).catch((err)=>{
+        console.error(err.message);
+       })
+     
+   
       navigate("/login");
     }
   }, [navigate, userInfo]);
