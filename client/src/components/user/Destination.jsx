@@ -74,6 +74,7 @@ export default function Modal() {
           const rtmpUrl = await rtmpFB().unwrap();
           dispatch(setFbRTMPURL({ rtmpUrl }));
         }
+          navigate("/video");
         const data = {
           title,
           destinations:{
@@ -81,8 +82,9 @@ export default function Modal() {
             "facebook" : isFb
           }
         }
+
         await streamDetails(data).unwrap();
-        navigate("/video");
+      
       } else {
         toast.error("select atleast one destination");
       }

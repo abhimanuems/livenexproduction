@@ -22,6 +22,7 @@ const Body = () => {
     if (!userInfo) {
      const pdata =  streamsAPI().unwrap();
      setData(pdata);
+     console.log("strea,ing ddata is ",pdata);
       navigate("/login");
     }
   }, [navigate, userInfo]);

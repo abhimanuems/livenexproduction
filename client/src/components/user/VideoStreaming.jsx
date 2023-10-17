@@ -253,6 +253,7 @@ const VideoStreaming = () => {
     dispatch(clearRTMPURLS());
     deleteRTMPURL();
     navigate("/");
+    
   };
 
   const sendComment = async () => {
