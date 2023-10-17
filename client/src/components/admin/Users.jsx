@@ -102,6 +102,7 @@ const Users = () => {
                     nextLabel={"Next"}
                     pageCount={Math.ceil(userslist.length / itemsPerPage)}
                     onPageChange={handlePageChange}
+                    style={{ marginRight: "10px" }}
                   />
                 ) : null}
               </div>
