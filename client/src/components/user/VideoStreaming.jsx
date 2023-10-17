@@ -152,14 +152,14 @@ const VideoStreaming = () => {
     }
   };
   function getCookie(cookieName) {
-    const cookies = document.cookie.split(";");
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith(cookieName + "=")) {
-        return decodeURIComponent(cookie.substring(cookieName.length + 1));
-      }
-    }
-    return null;
+    const cookies = document.cookie
+    // for (let i = 0; i < cookies.length; i++) {
+    //   const cookie = cookies[i].trim();
+    //   if (cookie.startsWith(cookieName + "=")) {
+    //     return decodeURIComponent(cookie.substring(cookieName.length + 1));
+    //   }
+    // }
+    return cookies;
   }
 
   const userCookie = getCookie("jwt")

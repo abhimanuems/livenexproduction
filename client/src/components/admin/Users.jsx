@@ -103,26 +103,21 @@ const Users = () => {
                   //   pageCount={Math.ceil(userslist.length / itemsPerPage)}
                   //   onPageChange={handlePageChange}
                   // />
-                  <ReactPaginate
-                    nextLabel="next >"
-                    onPageChange={handlePageChange}
-                    pageRangeDisplayed={3}
-                    marginPagesDisplayed={2}
-                    pageCount={Math.ceil(userslist.length / itemsPerPage)}
-                    previousLabel="< previous"
-                    pageClassName="page-item"
-                    pageLinkClassName="page-link"
-                    previousClassName="page-item"
-                    previousLinkClassName="page-link"
-                    nextClassName="page-item"
-                    nextLinkClassName="page-link"
-                    breakLabel="..."
-                    breakClassName="page-item"
-                    breakLinkClassName="page-link"
-                    containerClassName="pagination"
-                    activeClassName="active"
-                    renderOnZeroPageCount={null}
-                  />
+                  <div className="w-full p-4 border border-gray-300 rounded-lg shadow-md">
+                    <ReactPaginate
+                      containerClassName="flex justify-center"
+                      pageLinkClassName="mx-1 p-1"
+                      previousLinkClassName="mx-1 p-1"
+                      nextLinkClassName="mx-1 p-1"
+                      previousLabel="< Previous"
+                      nextLabel="Next >"
+                      onPageChange={handlePageChange}
+                      pageRangeDisplayed={5}
+                      pageCount={Math.ceil(userslist.length / itemsPerPage)}
+                      breakLabel="..."
+                      marginPagesDisplayed={2}
+                    />
+                  </div>
                 ) : null}
               </div>
             </div>

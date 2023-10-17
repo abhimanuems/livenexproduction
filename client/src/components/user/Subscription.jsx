@@ -190,11 +190,11 @@ const Subscription = () => {
                 >
                   Subscribe
                 </a>
-                <p className="text-base font-semibold text-gray-600">
+                <p className="text-base font-semibold text-gray-600 mt-3">
                   Try a free trial for 30 days
                 </p>
                 <a
-                  className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer"
+                  className="mt-5 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer"
                   onClick={displayRazorpay}
                 >
                   Free Trial
