@@ -1,7 +1,7 @@
-import React, { useEffect,useState } from 'react'
-import {useTicketsMutation} from '../../slices/adminApiSlice'
-import {toast} from 'react-toastify'
-import TicketReply from './TicketReply'
+import React, { useEffect,useState } from 'react';
+import {useTicketsMutation} from '../../slices/adminApiSlice';
+import {toast} from 'react-toastify';
+import TicketReply from './TicketReply';
 
 const Ticket = () => {
 

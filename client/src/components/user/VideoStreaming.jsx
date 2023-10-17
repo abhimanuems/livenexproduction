@@ -88,16 +88,20 @@ const VideoStreaming = () => {
     };
   }, []);
 
-  useInterval(() => {
-    if (isActive && rtmpUrlFb) {
-      setviewCountTimer(10000);
-      getFbComments();
-    }
-    if (isActive && rtmpurlYoutube) {
-      setviewCountTimer(50000);
-      YTcomments();
-    }
-  }, viewCountTimer);
+  useInterval(
+    () => {
+      if (isActive && rtmpUrlFb) {
+        setviewCountTimer(10000);
+        getFbComments();
+      }
+      if (isActive && rtmpurlYoutube) {
+        setviewCountTimer(50000);
+        YTcomments();
+      }
+    },
+    viewCountTimer,
+    stream
+  );
 
   const youtubeLiveViewCount = async () => {
     const YTviewCounts = await YTviewCount().unwrap();
@@ -161,11 +165,13 @@ const VideoStreaming = () => {
   });
 
   const handleStartRecording = () => {
+
     if (!socket) {
       toast.error("Socket is not initialized");
       console.error("Socket is not initialized.");
       return;
     }
+    setStreams(!stream);
     recorderInit();
     setActive(true);
   };

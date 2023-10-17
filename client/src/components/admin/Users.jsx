@@ -1,30 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import {useUserslistMutation} from "../../slices/adminApiSlice";
-import {toast} from 'react-toastify'
+import React, { useEffect, useState } from "react";
+import { useUserslistMutation } from "../../slices/adminApiSlice";
+import { toast } from "react-toastify";
+import ReactPaginate from "react-paginate";
 
 const Users = () => {
   const [getUserAPI] = useUserslistMutation();
-  const [userslist,setUsersList] = useState([]);
-    useEffect(()=>{
-      getUsersList();
-    },[])
-    const getUsersList = async()=>{
-    await getUserAPI().unwrap().then((response)=>{
-      setUsersList(response.users);
-      console.log(response.users);
-    }).catch((err)=>{
-      console.error(err);
-      toast.error("some thing went wrong");
-      
-    })
-    }
-      function formatDate(dateString) {
-        const date = new Date(dateString);
-        const options = { year: "numeric", month: "long", day: "numeric" };
-        return new Intl.DateTimeFormat("en-US", options).format(date);
-      }
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10;
+
+  const [userslist, setUsersList] = useState([]);
+
+  useEffect(() => {
+    getUsersList();
+  }, []);
+
+  const getUsersList = async () => {
+    await getUserAPI()
+      .unwrap()
+      .then((response) => {
+        setUsersList(response.users);
+        console.log(response.users);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Something went wrong");
+      });
+  };
+
+  const paginateData = () => {
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return userslist.slice(startIndex, endIndex);
+  };
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Intl.DateTimeFormat("en-US", options).format(date);
+  }
+
   return userslist?.length ? (
-    <div className=" w-5/6 bg-gray-100">
+    <div className="w-5/6 bg-gray-100">
       <div className="bg-gray-100 text-center mt-4">
         <h1 className="text-[#19376D] text-xl font-bold mt-3">User List</h1>
       </div>
@@ -47,9 +67,9 @@ const Users = () => {
                   </tr>
                 </thead>
                 {userslist
-                  ? userslist.map((index) => (
+                  ? paginateData().map((index) => (
                       <tbody className="text-gray-600 text-sm font-light">
-                        <tr className="border-b border-gray-200 hover:bg-gray-100">
+                        <tr className="border-b border-gray-200 hover-bg-gray-100">
                           <td className="py-3 px-6 text-left whitespace-nowrap">
                             <div className="flex items-center">
                               <span className="font-medium">{index.email}</span>
@@ -64,9 +84,7 @@ const Users = () => {
                             <div className="flex items-center justify-center">
                               <span>
                                 {index.razorpayDetails?.endDate ? (
-                                  <span className="text-green-500">
-                                    Active{" "}
-                                  </span>
+                                  <span className="text-green-500">Active</span>
                                 ) : (
                                   <span className="text-red-500">Inactive</span>
                                 )}
@@ -82,15 +100,21 @@ const Users = () => {
           </div>
         </div>
       </div>
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={Math.ceil(userslist.length / itemsPerPage)}
+        onPageChange={handlePageChange}
+      />
     </div>
-  ): (
-      <div className="p-4 text-center">
-        <h2 className="text-lg font-semibold mb-2">No Users</h2>
-        <div className="bg-white  p-6 text-center">
-          <p className="text-center text-red-500">No items to display.</p>
-        </div>
+  ) : (
+    <div className="p-4 text-center">
+      <h2 className="text-lg font-semibold mb-2">No Users</h2>
+      <div className="bg-white p-6 text-center">
+        <p className="text-center text-red-500">No items to display.</p>
       </div>
-    );
-}
+    </div>
+  );
+};
 
-export default Users
+export default Users;

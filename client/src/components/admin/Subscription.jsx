@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import {useSubscriptionListMutation} from '../../slices/adminApiSlice'
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const Subscription = () => {
+     const { adminInfo } = useSelector((state) => state.adminAuth);
   const [subscriptionList,setSubscriptionList] = useState(null);
   const [subscriptionAPI] = useSubscriptionListMutation();
+  const navigate = useNavigate();
   useEffect(() => {
-    getSubscriptionList();
+    if (!adminInfo){
+      navigate('/admins/login');
+    } getSubscriptionList();
   }, []);
 
   const getSubscriptionList = async()=>{

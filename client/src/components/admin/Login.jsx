@@ -15,6 +15,8 @@ function Login() {
   useEffect(() => {
     if (adminInfo) {
       navigate("/admins/dashboard");
+    }else{
+      navigate('/admins/login')
     }
   }, [adminInfo, navigate]);
 

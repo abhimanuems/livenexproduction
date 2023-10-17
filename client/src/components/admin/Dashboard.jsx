@@ -15,18 +15,25 @@ import {
   useUserslistMutation,
   useSubscriptionListMutation,
 } from "../../slices/adminApiSlice";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 
  const Dashboard = () => {
+   const { adminInfo } = useSelector((state) => state.adminAuth);
   const [usersAPI] = useUserslistMutation();
   const [SubcribtionsAPI] = useSubscriptionListMutation();
   const [chartData, setchartData] = useState(null);
   const [pieChartData, setpieChartData] = useState([]);
   const [dashboardData, setdashboardData] = useState({});
   const [noOfUsers,setNoofUsers] = useState(null);
-  const [noofSubscribers,setnoOfSubscribers] = useState(null);;
+  const [noofSubscribers,setnoOfSubscribers] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if(!adminInfo){
+      navigate('/admins/login')
+    }
     const getChartData = async () => {
       const mockChartData = [
         { name: "sun", revenue: 0},
