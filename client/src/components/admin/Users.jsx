@@ -7,9 +7,7 @@ const Users = () => {
   const [getUserAPI] = useUserslistMutation();
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
-
   const [userslist, setUsersList] = useState([]);
-
   useEffect(() => {
     getUsersList();
   }, []);
@@ -96,16 +94,17 @@ const Users = () => {
                     ))
                   : null}
               </table>
+              <ReactPaginate
+                className="ml-10"
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                pageCount={Math.ceil(userslist.length / itemsPerPage)}
+                onPageChange={handlePageChange}
+              />
             </div>
           </div>
         </div>
       </div>
-      <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={Math.ceil(userslist.length / itemsPerPage)}
-        onPageChange={handlePageChange}
-      />
     </div>
   ) : (
     <div className="p-4 text-center">

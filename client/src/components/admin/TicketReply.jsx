@@ -3,13 +3,11 @@ import { useTicketReplyMutation } from "../../slices/adminApiSlice";
 import { toast } from "react-toastify";
 
 const TicketReply = (props) => {
-  console.log("props is ",props)
   const email = props.email;
   const subject = props.subject;
   const id = props.id;
   const [replyMessage, setReplyMessage] = useState("");
   const [ticketReplyAPI] = useTicketReplyMutation();
-
   const handleReplySubmit = async (e) => {
     e.preventDefault();
     if (replyMessage.trim() === "") {
@@ -21,8 +19,8 @@ const TicketReply = (props) => {
       .unwrap()
       .then((res) => {
         toast.info("Ticket resolved");
-       props.isReply(false);
-       props.ticketData(null);
+        props.isReply(false);
+        props.ticketData(null);
       })
       .catch((err) => {
         console.error("Internal error", err);
