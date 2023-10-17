@@ -37,7 +37,7 @@ const sendMail = (email, otp, res) => {
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log(error.message);
+      console.error(error.message);
       res.status(400).json({ error: "invalid email" });
     } else {
       console.log("Email sent:" + info.response);
@@ -71,12 +71,12 @@ const signup = async (req, res) => {
           }
         })
         .catch((err) => {
-          console.log(err.message);
+          console.error(err.message);
           if (err) throw err;
         });
     }
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
     if (err) throw err;
   }
 };
@@ -86,7 +86,7 @@ const getOtp = (req, res) => {
 
     sendMail(email, otp, res);
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
     throw err;
   }
 };

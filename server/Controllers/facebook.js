@@ -111,7 +111,6 @@ const getFbComments = async (req, res) => {
 const getRTMPFB = async (req, res) => {
   try {
     const data = await User.findOne({ _id: req.userEmail });
-    console.log(data.facebook.rtmpUrl);
     res.status(200).json(data.facebook.rtmpUrl);
   } catch (err) {
     console.error(err.message);
@@ -156,7 +155,6 @@ const FBviewCount = async (req, res) => {
       `https://graph.facebook.com/v18.0/${liveVideoId}?fields=live_views&access_token=${accessToken}`
     )
     .then((response) => {
-      console.log(response.data);
       const liveViews = response.data.live_views;
       res.status(200).json({ count: liveViews });
     })

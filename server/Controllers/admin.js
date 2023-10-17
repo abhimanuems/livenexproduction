@@ -27,7 +27,6 @@ const adminLogin = (req, res) => {
 const getUsers =async (req,res)=>{
   try{
       const users = await User.find();
-      console.log(users)
       res.status(200).json({users});
   }catch(err){
     console.error(err.message);
@@ -151,8 +150,8 @@ const ticketResolve =async(req,res)=>{
       },
       { new: true }
     )
-      .then((res) => {
-        console.log("res is ", res);
+      .then((response) => {
+       res.status(200).json({response});
       })
       .catch((err) => {
         console.log(err);

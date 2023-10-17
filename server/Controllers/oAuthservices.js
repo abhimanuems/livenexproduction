@@ -114,7 +114,7 @@ const postCommentsYT = async (req, res) => {
     const response = postCommentsYouTube(liveChatId, accessToken, comment);
     res.status(200).json({ response });
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
   }
 };
 

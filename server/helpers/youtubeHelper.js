@@ -175,7 +175,6 @@ const bindYoutubeBroadcastToStream = async (
         },
       }
     );
-    console.log("Live Chat ID: from binde streaming", liveChatId);
      res.status(200).json({ message: "streaming YT done" });
     await startStreaming(youtubeBroadcastId, youtubeAccessToken, userId);
    
@@ -212,7 +211,7 @@ const startStreaming = async (
       );
     })
     .catch((err) => {
-      console.log(err.response.data.error.errors);
+      console.error(err.response.data.error.errors);
     });
 
   console.log("youtube going live");
@@ -235,7 +234,7 @@ const stopStreaming = async (youtubeBroadcastId, youtubeAccessToken, res) => {
       return response;
     })
     .catch((err) => {
-      console.log(err.response.data);
+      console.error(err.response.data);
       res.status(400).json({ data: err.response.data });
     });
 };
@@ -256,15 +255,6 @@ const getLiveChat = async (liveChatId, accessToken) => {
         }
       )
       .then((response) => {
-        console.log("Live chat from YouTube:", response?.data);
-        console.log(
-          "chat us ",
-          response?.data?.items[0]?.snippet?.displayMessage
-        );
-        console.log(
-          "chat us ",
-          response?.data?.items[0]?.authorDetails?.displayName
-        );
         return response?.data;
       })
       .catch((error) => {
@@ -303,7 +293,6 @@ const postCommentsYouTube = async (liveChatId, accessToken, comment) => {
         }
       )
       .then((response) => {
-        console.log("Message posted successfully:", response.data);
         return response;
       })
       .catch((error) => {

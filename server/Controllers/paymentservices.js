@@ -69,7 +69,7 @@ const successFunction = async (req, res) => {
         { $set: { razorpayDetails: razorpayDetails } }
       );
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
       throw err;
     }
 
@@ -90,7 +90,6 @@ const checkSubscription = async (req, res) => {
     let subscribedDate = subscription?.razorpayDetails?.startDate;
     const today = new Date();
     subscribedDate?.setDate(subscribedDate?.getDate() + 28);
-    console.log(subscribedDate);
     if (today <= subscribedDate) res.status(200).json(true);
     else res.status(200).json(false);
   } catch (err) {
@@ -121,7 +120,6 @@ const getTicketData = async (req, res) => {
     const userId = req.userEmail;
     User.find({ _id: userId }, { tickets: 1, _id: 0 })
       .then((response) => {
-        console.log(response);
         res.status(200).json({ response: response[0]?.tickets });
       })
       .catch((err) => {
