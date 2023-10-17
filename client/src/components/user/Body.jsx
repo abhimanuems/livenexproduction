@@ -19,16 +19,19 @@ const Body = () => {
   const [subscribe] = useSubscriptionMutation();
   const [streamsAPI] = useGetPastStreamsMutation();
   useEffect(() => {
+    const cookie = document.cookie
     if (!userInfo) {
-       streamsAPI().unwrap().then((pdata)=>{
-          console.log("strea,ing ddata is ", pdata);
-        setData(pdata);
-       }).catch((err)=>{
-        console.error(err.message);
-       })
-     
-   
-      navigate("/login");
+       navigate("/login");
+    }else{
+       streamsAPI()
+         .unwrap()
+         .then((pdata) => {
+           console.log("streaing ddata is ", pdata);
+           setData(pdata);
+         })
+         .catch((err) => {
+           console.error(err.message);
+         });
     }
   }, [navigate, userInfo]);
 

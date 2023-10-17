@@ -97,7 +97,7 @@ const Users = () => {
               <div className="mt-4 justify-center text-gray-700">
                 {userslist?.length > 8 ? (
                   <ReactPaginate
-                    className="ml-10 flex justify-center m-4"
+                    className="ml-10 flex justify-center m-4 mr-3 pr-2"
                     previousLabel={"Previous"}
                     nextLabel={"Next"}
                     pageCount={Math.ceil(userslist.length / itemsPerPage)}
