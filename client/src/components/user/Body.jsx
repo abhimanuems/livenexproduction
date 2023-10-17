@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const Body = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [pro, setPro] = useState();
+  const [pro, setPro] = useState(false);
   const [data,setData] =useState([]);
   const { userInfo } = useSelector((state) => state.auth);
   const [subscribe] = useSubscriptionMutation();
@@ -34,7 +34,6 @@ const Body = () => {
       setPro(false);
     }
     dispatch(clearRTMPURLS());
-    setPro(false)
   }, [pro]);
 
   const handleModal = () => {
