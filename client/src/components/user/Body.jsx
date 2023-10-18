@@ -17,21 +17,20 @@ const Body = () => {
   const [data, setData] = useState(null);
   const { userInfo } = useSelector((state) => state.auth);
   const [subscribe] = useSubscriptionMutation();
-  const [streamsAPI, { isLoading }] = useGetPastStreamsMutation(); // Track API loading state
-  const [hasFetchedData, setHasFetchedData] = useState(false); // Track if data has been fetched
+  const [streamsAPI, { isLoading }] = useGetPastStreamsMutation();
+  const [hasFetchedData, setHasFetchedData] = useState(false); 
 
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
     } else {
       if (!hasFetchedData && !isLoading) {
-        // Check if data hasn't been fetched and API call isn't in progress
         streamsAPI()
           .unwrap()
           .then((pdata) => {
             console.log("streaing ddata is ", pdata);
             setData(pdata);
-            setHasFetchedData(true); // Update state to indicate data has been fetched
+            setHasFetchedData(true);
           })
           .catch((err) => {
             console.error(err.message);
@@ -53,6 +52,8 @@ const Body = () => {
   const handleModal = () => {
     return true;
   };
+  
+
 
   return (
     <div className="bg-white w-5/6 p-4">
@@ -71,7 +72,7 @@ const Body = () => {
         )}
       </div>
       <hr />
-      {hasFetchedData &&data?.length > 0 ? ( 
+      {hasFetchedData &&data?.response?.length > 0 ? ( 
         <div>
           <p className="font-semibold text-gray-700 text-lg p-2 m-2">
             Past streams
@@ -86,7 +87,7 @@ const Body = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, index) => (
+                {data.response.map((item, index) => (
                   <tr key={index} className="text-gray-600 text-sm font-medium">
                     <td className="px-6 py-4">{item.title}</td>
                     <td className="px-6 py-4 ">
