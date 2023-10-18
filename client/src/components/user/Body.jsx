@@ -56,25 +56,11 @@ const Body = () => {
     function formatDate(isoDateString) {
       
       const date = new Date(isoDateString);
-
-      // Format the date in a different way
       const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
      return formattedDate;
     }
-  const response = {
-    streams: [
-      { title: "test2", destinations: [], _id: "652f5f2a114d1c4ef81b1a3c" },
-      { title: "test2t", destinations: [], _id: "652f640b114d1c4ef81b201b" },
-      { title: "teste", destinations: [], _id: "652f67a9691f2c7c4e499fa0" },
-      {
-        title: "test",
-        startTime: "2023-10-18T09:01:40.058Z",
-        destinations: [{"youtube":true}],
-        _id: "652f9ef41092ce582a42566a",
-      },
-    ],
-  };
+
   
 
 
@@ -95,8 +81,8 @@ const Body = () => {
         )}
       </div>
       <hr />
-      {hasFetchedData &&data?.streams?.length > 0 ? ( 
-      // {response?.streams?.length > 0 ? (
+      {hasFetchedData && data?.streams?.length > 0 ? (
+        // {response?.streams?.length > 0 ? (
         <div>
           <p className="font-semibold text-gray-700 text-lg p-2 m-2">
             Past streams
@@ -111,8 +97,8 @@ const Body = () => {
                 </tr>
               </thead>
               <tbody>
-                {data?.response?.map((item, index) => (
-                // {response?.streams.map((item, index) => (
+                {data?.streams?.map((item, index) => (
+                  // {response?.streams.map((item, index) => (
                   <tr key={index} className="text-gray-600 text-sm font-medium">
                     {console.log(item)}
                     <td className="px-6 py-4">{item?.title}</td>

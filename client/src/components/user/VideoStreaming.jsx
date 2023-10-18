@@ -405,7 +405,6 @@ const VideoStreaming = () => {
               Live viewer's comments show up here
               {rtmpUrlFb ? (
                 <p>
-                  {" "}
                   viewer comments won't show up unless the stream is public on
                   Facebook{" "}
                 </p>
