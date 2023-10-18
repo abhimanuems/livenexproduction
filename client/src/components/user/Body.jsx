@@ -19,7 +19,6 @@ const Body = () => {
   const [subscribe] = useSubscriptionMutation();
   const [streamsAPI, { isLoading }] = useGetPastStreamsMutation();
   const [hasFetchedData, setHasFetchedData] = useState(false);
-  const [reverseData,setReverseData] = useState(null)
 
   useEffect(() => {
     if (!userInfo) {
@@ -30,9 +29,6 @@ const Body = () => {
           .unwrap()
           .then((pdata) => {
             setData(pdata);
-            const rev = pdata.response;
-            rev.reverse();
-            setReverseData(rev);
             setHasFetchedData(true);
           })
           .catch((err) => {
@@ -96,7 +92,7 @@ const Body = () => {
                 </tr>
               </thead>
               <tbody>
-                {setReverseData?.map((item, index) => (
+                {data?.response?.map((item, index) => (
                   <tr
                     key={index}
                     className="text-gray-600 text-sm font-medium border border-slate-200"

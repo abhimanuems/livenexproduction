@@ -102,7 +102,7 @@ const Users = () => {
                       pageLinkClassName="mx-1 p-1"
                       previousLinkClassName="mx-1 p-1"
                       nextLinkClassName="mx-1 p-1"
-                      previousLabel=" Previous"
+                      previousLabel=" Prev"
                       nextLabel="Next "
                       onPageChange={handlePageChange}
                       pageRangeDisplayed={5}
