@@ -8,6 +8,7 @@ import {
 import { clearRTMPURLS } from "../../slices/userDetails.js";
 import Destination from "../user/Destination";
 import { toast } from "react-toastify";
+import { BsFacebook, BsYoutube } from "react-icons/bs";
 
 
 const Body = () => {
@@ -19,7 +20,6 @@ const Body = () => {
   const [subscribe] = useSubscriptionMutation();
   const [streamsAPI] = useGetPastStreamsMutation();
   useEffect(() => {
-    const cookie = document.cookie
     if (!userInfo) {
        navigate("/login");
     }else{
@@ -85,18 +85,18 @@ const Body = () => {
               <tbody>
                 {data.map((item, index) => (
                   <tr key={index} className="text-gray-600 text-sm font-medium">
-                    <td className="px-6 py-4">{item.email}</td>
-                    <td className="px-6 py-4 description-cell">
-                      <div className="truncate max-w-xs">
-                        {item.description}
-                      </div>
+                    <td className="px-6 py-4">{item.title}</td>
+                    <td className="px-6 py-4 ">
+                      <div className="truncate max-w-xs">{item?.startTime}</div>
                     </td>
                     <td className="px-6 py-4">
-                      {item.status ? (
-                        <span className="text-green-500">Resolved</span>
-                      ) : (
-                        <span className="text-blue-500">Pending</span>
-                      )}
+                      {item.destinations === "youtube" ? (
+                        <span className="text-red-500">
+                          <BsYoutube />
+                        </span>
+                      ) : item.destinations === "facebook" ? (
+                        <span className="text-blue-500"><BsFacebook/></span>
+                      ) : null}
                     </td>
                   </tr>
                 ))}

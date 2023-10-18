@@ -205,15 +205,15 @@ const getStreamDetails = async(req,res)=>{
 const streamingDetails = async(req,res)=>{
   try{
     const { title, destinations } = req.body;
-    const date = Date.now();
+    const startTime = Date.now();
     await User.updateOne(
       { _id: req.userEmail },
       {
         $push: {
           streams: {
             title,
-            date,
-            platforms: destinations,
+            startTime,
+            destinations,
           },
         },
       }

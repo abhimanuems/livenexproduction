@@ -382,7 +382,7 @@ const VideoStreaming = () => {
         </div>
       </div>
 
-      <div className="w-3/12 p-4 bg-white">
+      <div className="w-3/12 p-4 bg-white grid grid-rows-[1fr,auto]">
         <div className="h-1/6">
           {isStream ? (
             <button
@@ -412,7 +412,7 @@ const VideoStreaming = () => {
               ) : null}
             </p>
 
-            <div className="h-72 overflow-y-auto">
+            <div className="h-72 overflow-y-auto relative ">
               <Chat comments={[fbliveComments, ytLivecomments]} />
             </div>
           </div>
