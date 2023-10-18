@@ -81,8 +81,7 @@ const Body = () => {
         )}
       </div>
       <hr />
-      {hasFetchedData && data?.streams?.length > 0 ? (
-        // {response?.streams?.length > 0 ? (
+      {hasFetchedData && data?.response?.length > 0 ? (
         <div>
           <p className="font-semibold text-gray-700 text-lg p-2 m-2">
             Past streams
@@ -97,7 +96,7 @@ const Body = () => {
                 </tr>
               </thead>
               <tbody>
-                {data?.streams?.map((item, index) => (
+                {data?.response?.streams.map((item, index) => (
                   // {response?.streams.map((item, index) => (
                   <tr key={index} className="text-gray-600 text-sm font-medium">
                     {console.log(item)}
