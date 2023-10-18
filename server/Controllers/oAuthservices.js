@@ -190,9 +190,9 @@ const YTendStream = async (req, res) => {
 const getStreamDetails = async(req,res)=>{
   try{
     const userId = req.userEmail;
-    User.find({ _id: userId })
+    User.find({ _id: userId }, { streams: 1, _id: 0 })
       .then((response) => {
-        res.status(200).json({ response});
+        res.status(200).json({ response });
       })
       .catch((err) => {
         res.status(400).json({ err });
@@ -207,17 +207,23 @@ const streamingDetails = async(req,res)=>{
     const { title, destinations } = req.body;
     const date = Date.now();
     await User.updateOne(
-     { _id:  req.userEmail },
-     {
-       $push: {
-         tickets: {
-           title,
-           date,
-           platforms: destinations,
-         },
-       },
-     }
-   );
+      { _id: req.userEmail },
+      {
+        $push: {
+          streams: {
+            title,
+            date,
+            platforms: destinations,
+          },
+        },
+      }
+    )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
    res.status(200).json({message: "added successfully"});
 
   }catch(err){
