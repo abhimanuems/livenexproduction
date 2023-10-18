@@ -21,19 +21,19 @@ const Body = () => {
   const [streamsAPI] = useGetPastStreamsMutation();
   useEffect(() => {
     if (!userInfo) {
-       navigate("/login");
-    }else{
-       streamsAPI()
-         .unwrap()
-         .then((pdata) => {
-           console.log("streaing ddata is ", pdata);
-           setData(pdata);
-         })
-         .catch((err) => {
-           console.error(err.message);
-         });
+      navigate("/login");
+    } else {
+      streamsAPI()
+        .unwrap()
+        .then((pdata) => {
+          console.log("streaing ddata is ", pdata);
+          setData(pdata);
+        })
+        .catch((err) => {
+          console.error(err.message);
+        });
     }
-  }, [navigate, userInfo]);
+  }, [navigate, userInfo, data]);
 
   useEffect(() => {
     const isSubscribed = subscribe().unwrap();
