@@ -87,7 +87,7 @@ const Body = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.response.map((item, index) => (
+                {data?.response?.[0].map((item, index) => (
                   <tr key={index} className="text-gray-600 text-sm font-medium">
                     <td className="px-6 py-4">{item.title}</td>
                     <td className="px-6 py-4 ">
