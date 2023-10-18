@@ -15,32 +15,31 @@ import {
   useUserslistMutation,
   useSubscriptionListMutation,
 } from "../../slices/adminApiSlice";
-import {useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-
- const Dashboard = () => {
-   const { adminInfo } = useSelector((state) => state.adminAuth);
+const Dashboard = () => {
+  const { adminInfo } = useSelector((state) => state.adminAuth);
   const [usersAPI] = useUserslistMutation();
   const [SubcribtionsAPI] = useSubscriptionListMutation();
   const [chartData, setchartData] = useState(null);
   const [pieChartData, setpieChartData] = useState([]);
   const [dashboardData, setdashboardData] = useState({});
-  const [noOfUsers,setNoofUsers] = useState(null);
-  const [noofSubscribers,setnoOfSubscribers] = useState(null);
+  const [noOfUsers, setNoofUsers] = useState(null);
+  const [noofSubscribers, setnoOfSubscribers] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(!adminInfo){
-      navigate('/admins/login')
+    if (!adminInfo) {
+      navigate("/admins/login");
     }
     const getChartData = async () => {
       const mockChartData = [
-        { name: "sun", revenue: 0},
-        { name: "mon", revenue: 0,  },
-        { name: "tue", revenue: 0},
-        { name: "wed", revenue: 0},
-        { name: "thu", revenue: 0},
+        { name: "sun", revenue: 0 },
+        { name: "mon", revenue: 0 },
+        { name: "tue", revenue: 0 },
+        { name: "wed", revenue: 0 },
+        { name: "thu", revenue: 0 },
         { name: "fri", revenue: 0 },
         { name: "sat", revenue: 1999 },
       ];
@@ -51,9 +50,7 @@ import {useNavigate} from "react-router-dom";
       ];
 
       const mockDashboardData = {
-        
         totalUsers: 100,
-      
       };
 
       setchartData(mockChartData);
@@ -65,9 +62,9 @@ import {useNavigate} from "react-router-dom";
 
   useEffect(() => {
     getUsersData();
-  }, [dashboardData,noOfUsers,noofSubscribers]);
+  }, [dashboardData, noOfUsers, noofSubscribers]);
 
-  const getUsersData = async()=>{
+  const getUsersData = async () => {
     usersAPI()
       .unwrap()
       .then((data) => {
@@ -75,20 +72,22 @@ import {useNavigate} from "react-router-dom";
         setNoofUsers(userList);
       })
       .catch((err) => {
-        console.log("error ",err)
-       throw err;
+        console.log("error ", err);
+        throw err;
       });
-      SubcribtionsAPI().unwrap().then((data)=>{
-        console.log("subscription data is ",data);
+    SubcribtionsAPI()
+      .unwrap()
+      .then((data) => {
+        console.log("subscription data is ", data);
         const subsribersList = data?.subscriptions?.length;
         setchartDatas(data);
         setnoOfSubscribers(subsribersList);
-      }).catch((err)=>{
-        throw err
       })
-  }
-  const setchartDatas =async(response)=>{
-
+      .catch((err) => {
+        throw err;
+      });
+  };
+  const setchartDatas = async (response) => {
     const mockChartData = [
       { name: "sun", revenue: 0 },
       { name: "mon", revenue: 0 },
@@ -100,8 +99,8 @@ import {useNavigate} from "react-router-dom";
     ];
     const today = new Date().getDay();
 
-    const startDay = (today + 1) % 7; 
-    const endDay = today; 
+    const startDay = (today + 1) % 7;
+    const endDay = today;
 
     const subscriptions = response.subscriptions.filter((subscription) => {
       const createdAt = new Date(subscription.createdAt);
@@ -109,14 +108,13 @@ import {useNavigate} from "react-router-dom";
       return createdAtDay >= startDay && createdAtDay <= endDay;
     });
 
-   
     for (let i = startDay; i <= endDay; i++) {
       const dayName = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"][i];
       const dayRevenue = subscriptions.reduce((totalRevenue, subscription) => {
         const createdAt = new Date(subscription.createdAt);
         const createdAtDay = createdAt.getDay();
         if (createdAtDay === i) {
-          return totalRevenue + subscription.amount; 
+          return totalRevenue + subscription.amount;
         }
         return totalRevenue;
       }, 0);
@@ -125,8 +123,7 @@ import {useNavigate} from "react-router-dom";
         chartDataItem.revenue = dayRevenue;
       }
     }
-
-  }
+  };
 
   const COLORS = ["#0088FE", "#FFBB28", "#00C49F"];
 
@@ -208,9 +205,7 @@ import {useNavigate} from "react-router-dom";
             </div>
             <div className="mt-16 md:grid-cols-2 md:gap-8 grid">
               <div>
-                <h1 className="pl-8 mb-8 font-bold">
-                  REVENUE
-                </h1>
+                <h1 className="pl-8 mb-8 font-bold">REVENUE</h1>
                 {chartData && (
                   <LineChart
                     width={500}
@@ -228,7 +223,7 @@ import {useNavigate} from "react-router-dom";
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    
+
                     <Line type="monotone" dataKey="revenue" stroke="#82ca9d" />
                   </LineChart>
                 )}

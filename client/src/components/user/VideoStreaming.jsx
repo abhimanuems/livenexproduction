@@ -44,12 +44,12 @@ const VideoStreaming = () => {
   const [isShareScreen, SetShareScreen] = useState(false);
   const navigate = useNavigate();
   const [stream, setStream] = useState(null);
-  const [isStream,setStreams] = useState(true)
+  const [isStream, setStreams] = useState(true);
   const [rtmpUrlFb, setRtmpFb] = useState(null);
   const [rtmpurlYoutube, setyoutubeRTMP] = useState(null);
   const [fbliveComments, setFbLiveComments] = useState(null);
   const [ytLivecomments, setYTliveComment] = useState(null);
-  const { userDetails } = useSelector((state) => state.userDetails);
+  const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
   const [YTpostComment] = usePostYTCommentMutation();
@@ -66,6 +66,9 @@ const VideoStreaming = () => {
   const [FBstats, setFbstats] = useState(false);
   const [deleteRTMPURLS] = useDeleteRTMPURLSMutation();
   useEffect(() => {
+    if(!userInfo){
+      navigate('/login')
+    }
     const getRTMPYTFB = async () => {
       const rtmpurlYT = await rtmpYoutube().unwrap();
       if (rtmpurlYT === null) {
@@ -152,8 +155,6 @@ const VideoStreaming = () => {
     }
   };
 
-
-
   const socket = io("https://ffmpegserverlivenex.shop", {
     transports: ["websocket"],
     query: {
@@ -164,7 +165,6 @@ const VideoStreaming = () => {
   });
 
   const handleStartRecording = () => {
-
     if (!socket) {
       toast.error("Socket is not initialized");
       console.error("Socket is not initialized.");
@@ -241,7 +241,6 @@ const VideoStreaming = () => {
   };
 
   const leaveStudio = () => {
-   
     socket.emit("client-stop-ffmpeg");
     if (stream) {
       const tracks = stream.getTracks();
@@ -252,7 +251,6 @@ const VideoStreaming = () => {
     dispatch(clearRTMPURLS());
     deleteRTMPURL();
     navigate("/home");
-    
   };
 
   const sendComment = async () => {

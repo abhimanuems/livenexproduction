@@ -182,28 +182,27 @@ const YTendStream = async (req, res) => {
     const youtubeAccessToken = result.youtube.authorizeToken;
     const broadcastId = result.youtube.broadcastId;
     const response = await stopStreaming(youtubeAccessToken, broadcastId, res);
-    //res.status(200).json({ response });
   } catch (err) {
     console.error(err.message);
   }
 };
-const getStreamDetails = async(req,res)=>{
-  try{
+const getStreamDetails = async (req, res) => {
+  try {
     const userId = req.userEmail;
     User.find({ _id: userId }, { streams: 1, _id: 0 })
       .then((response) => {
-        res.status(200).json({response: response[0]?.streams});
+        res.status(200).json({ response: response[0]?.streams });
       })
       .catch((err) => {
         res.status(400).json({ err });
       });
-  }catch(err){
-    res.status(400).json({err});
+  } catch (err) {
+    res.status(400).json({ err });
   }
-}
+};
 
-const streamingDetails = async(req,res)=>{
-  try{
+const streamingDetails = async (req, res) => {
+  try {
     const { title, destinations } = req.body;
     const startTime = Date.now();
     await User.updateOne(
@@ -224,13 +223,12 @@ const streamingDetails = async(req,res)=>{
       .catch((err) => {
         console.log(err);
       });
-   res.status(200).json({message: "added successfully"});
-
-  }catch(err){
+    res.status(200).json({ message: "added successfully" });
+  } catch (err) {
     console.error(err.message);
-    res.status(400).json({errMessage: "error occurs"});
+    res.status(400).json({ errMessage: "error occurs" });
   }
-}
+};
 
 export {
   oauthCallback,

@@ -13,23 +13,20 @@ import {
 
 const adminRouter = Router();
 
-adminRouter.post('/login',adminLogin);
+adminRouter.post("/login", adminLogin);
 
-adminRouter.get("/users", adminAuthProtect,getUsers);
+adminRouter.get("/users", adminAuthProtect, getUsers);
 
-adminRouter.get("/banuser/:id", adminAuthProtect,banUser);
+adminRouter.get("/banuser/:id", adminAuthProtect, banUser);
 
-adminRouter.get("/unblock/:id",adminAuthProtect,unblock);
+adminRouter.get("/unblock/:id", adminAuthProtect, unblock);
 
-adminRouter.get("/subscription",adminAuthProtect,subscriptionsDetails)
+adminRouter.get("/subscription", adminAuthProtect, subscriptionsDetails);
 
-adminRouter.get("/tickets", adminAuthProtect,tickets);
+adminRouter.get("/tickets", adminAuthProtect, tickets);
 
-adminRouter.post("/ticketreply",adminAuthProtect,ticketResolve)
+adminRouter.post("/ticketreply", adminAuthProtect, ticketResolve);
 
-adminRouter.get("/logout", adminAuthProtect,logout);
+adminRouter.get("/logout", adminAuthProtect, logout);
 
-
-export default adminRouter
-
-
+export default adminRouter;

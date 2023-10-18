@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSignupMutation } from "../../slices/userApiSlice";
 import { setUserDetails } from "../../slices/authSlice";
 import { useDispatch } from "react-redux";
-
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -28,14 +26,13 @@ export default function Signup() {
         toast.error("Password must be at least 6 characters long");
         return;
       }
-     
-       dispatch(setUserDetails({email,password }));
-       navigate("/verifyotp");
+
+      dispatch(setUserDetails({ email, password }));
+      navigate("/verifyotp");
     } catch (err) {
       toast.info("User already exists");
       navigate("/login");
     }
-      
   };
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-[#E4ECFF] ">
@@ -88,9 +85,7 @@ export default function Signup() {
             {" "}
             Already have an account?{" "}
             <Link to="/login">
-              <a  className="font-medium text-blue-600 hover:underline">
-                Login
-              </a>
+              <a className="font-medium text-blue-600 hover:underline">Login</a>
             </Link>
           </p>
         </div>

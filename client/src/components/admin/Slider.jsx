@@ -1,8 +1,8 @@
 import React from "react";
-import {RiDashboardFill} from 'react-icons/ri'
-import {MdSubscriptions} from 'react-icons/md'
-import {HiUsers} from 'react-icons/hi2'
-import {FaTicketSimple} from 'react-icons/fa6'
+import { RiDashboardFill } from "react-icons/ri";
+import { MdSubscriptions } from "react-icons/md";
+import { HiUsers } from "react-icons/hi2";
+import { FaTicketSimple } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 const Slider = () => {

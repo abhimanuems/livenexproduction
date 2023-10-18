@@ -1,4 +1,4 @@
-#vi server/Dockerfile
+
 FROM node:latest
 
 WORKDIR /app

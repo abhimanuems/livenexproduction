@@ -1,56 +1,66 @@
 import React, { useEffect, useState } from "react";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 import {
   useTicketMutation,
   useTicketDataMutation,
 } from "../../slices/userApiSlice";
-import ViewTicktes from "../user/ViewTicktes"
+import ViewTicktes from "../user/ViewTicktes";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Ticket = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const [email, setEmail] = useState(userInfo?.deatils);
-  const [subject,setSubject] = useState('');
-  const [description,SetDescription] = useState('');
+  const [subject, setSubject] = useState("");
+  const [description, SetDescription] = useState("");
   const [ticketAPI] = useTicketMutation();
   const [ticketDataAPI] = useTicketDataMutation();
-  const [viewTicket,setViewTicket] = useState(false);
-  const [ticketDatas,setTicketData] = useState(null);
+  const [viewTicket, setViewTicket] = useState(false);
+  const [ticketDatas, setTicketData] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
     getTicketData();
   }, []);
-  const getTicketData = async()=>{
-    await ticketDataAPI().unwrap().then((data)=>{
-      setTicketData(data)
-    }).catch((err)=>{
-      console.error(err);
-      toast.error("failed to fetch datas");
-    })
-  }
-  const submitTicket =async(e)=>{
+  const getTicketData = async () => {
+    await ticketDataAPI()
+      .unwrap()
+      .then((data) => {
+        setTicketData(data);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("failed to fetch datas");
+      });
+  };
+  const submitTicket = async (e) => {
     e.preventDefault();
-    if(email.trim() === ''){
-      toast.error("kindly fill the email")
+    if (email.trim() === "") {
+      toast.error("kindly fill the email");
     }
-    if(subject.trim() === ''){
-      toast.error("Enter a subject")
+    if (subject.trim() === "") {
+      toast.error("Enter a subject");
     }
-    if(description.trim() === ''){
-      toast.error("Enter the description")
+    if (description.trim() === "") {
+      toast.error("Enter the description");
     }
-    const data = {email,subject,description,status:false}
-     ticketAPI(data).unwrap().then((res)=>{
-      toast.info("Ticket submitted successful");
-      setSubject('');
-      SetDescription("");
-      getTicketData();
-      setViewTicket(!viewTicket)
-    }).catch((err)=>{
-      console.error(err);
-      toast.error("ticket failed")
-    })
-
-  }
+    const data = { email, subject, description, status: false };
+    ticketAPI(data)
+      .unwrap()
+      .then((res) => {
+        toast.info("Ticket submitted successful");
+        setSubject("");
+        SetDescription("");
+        getTicketData();
+        setViewTicket(!viewTicket);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("ticket failed");
+      });
+  };
   return (
     <div>
       <div className="p-1 m-1 text-right">

@@ -39,9 +39,4 @@ const adminAuthProtect = async (req, res, next) => {
   }
 };
 
-
-
-
-
-
 export { protect, adminAuthProtect };

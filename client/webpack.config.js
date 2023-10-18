@@ -1,9 +1,7 @@
-// webpack.config.js
 
 import path from "path";
 
 export default {
-  // Other webpack configuration options...
 
   resolve: {
     fallback: {

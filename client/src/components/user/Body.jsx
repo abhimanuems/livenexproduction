@@ -18,7 +18,7 @@ const Body = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const [subscribe] = useSubscriptionMutation();
   const [streamsAPI, { isLoading }] = useGetPastStreamsMutation();
-  const [hasFetchedData, setHasFetchedData] = useState(false); 
+  const [hasFetchedData, setHasFetchedData] = useState(false);
 
   useEffect(() => {
     if (!userInfo) {
@@ -39,12 +39,13 @@ const Body = () => {
   }, [navigate, userInfo, hasFetchedData, isLoading]);
 
   useEffect(() => {
-    const isSubscribed = subscribe().unwrap();
-    if (isSubscribed) {
-      setPro(true);
-    } else {
-      setPro(false);
-    }
+    subscribe()
+      .unwrap()
+      .then((res) => {
+        setPro(true);
+      })
+      .catch((err) => setPro(false));
+
     dispatch(clearRTMPURLS());
   }, [pro]);
 
@@ -52,13 +53,12 @@ const Body = () => {
     return true;
   };
 
-    function formatDate(isoDateString) {
-      
-      const date = new Date(isoDateString);
-      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  function formatDate(isoDateString) {
+    const date = new Date(isoDateString);
+    const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-     return formattedDate;
-    }
+    return formattedDate;
+  }
 
   return (
     <div className="bg-white w-5/6 p-4">
@@ -78,7 +78,6 @@ const Body = () => {
       </div>
       <hr />
       {hasFetchedData && data?.response?.length > 0 ? (
-   
         <div>
           <p className="font-semibold text-gray-700 text-lg p-2 m-2">
             Past streams

@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -21,7 +21,6 @@ const Subscription = () => {
     }
   }, [navigate, userInfo]);
 
- 
   function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -37,79 +36,76 @@ const Subscription = () => {
   }
 
   async function displayRazorpay() {
-  try{
+    try {
+      const isSub = await subscribe().unwrap();
+      console.log(isSub);
+      if (isSub) {
+        toast.info("you have already subscribed");
+        return;
+      }
+      const res = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+      );
 
-   const isSub = await subscribe().unwrap();
-   console.log(isSub)
-   if(isSub){
-    toast.info("you have already subscribed");
-    return
-   }
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
+      if (!res) {
+        toast.info("Razorpay SDK failed to load. Are you online?");
+        return;
+      }
 
-    if (!res) {
-      toast.info("Razorpay SDK failed to load. Are you online?");
-      return;
-    }
+      const result = await razorpay().unwrap();
+      console.log("result is ", result);
 
-    const result = await razorpay().unwrap();
-    console.log("result is ",result)
+      if (!result) {
+        toast.error("Server error. Are you online?");
+        return;
+      }
 
- 
+      const { amount, id: order_id, currency } = result;
 
-    if (!result) {
-      toast.error("Server error. Are you online?");
-      return;
-    }
-
-    const { amount, id: order_id, currency } = result;
-
-    const options = {
-      key: "rzp_test_bLt7yzzH20t8v9",
-      amount: amount.toString(),
-      currency: currency,
-      name: "LiveNex",
-      description: "Enjoy seamless streaming",
-      image: {},
-      order_id: order_id,
-      handler: async function (response) {
-        let email;
-        if (userInfo.deatils.email) {
-          email = userInfo.deatils.email;
-        } else {
-          email = userInfo.deatils;
-        }
-        const data = {
-          orderCreationId: order_id,
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-          razorpaySignature: response.razorpay_signature,
-          email,
-        };
-        const result = await razorpaySuccess(data).unwrap();
-        if (result.msg) toast.info("payment successful");
-        if (result.msg_error) toast.error("payment failure");
-      },
-      prefill: {
+      const options = {
+        key: "rzp_test_bLt7yzzH20t8v9",
+        amount: amount.toString(),
+        currency: currency,
         name: "LiveNex",
-        email: "livenex@gmail.com",
-        contact: "985745310",
-      },
-      notes: {
-        address: "Example Corporate Office",
-      },
-      theme: {
-        color: "#61dafb",
-      },
-    };
+        description: "Enjoy seamless streaming",
+        image: {},
+        order_id: order_id,
+        handler: async function (response) {
+          let email;
+          if (userInfo.deatils.email) {
+            email = userInfo.deatils.email;
+          } else {
+            email = userInfo.deatils;
+          }
+          const data = {
+            orderCreationId: order_id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpaySignature: response.razorpay_signature,
+            email,
+          };
+          const result = await razorpaySuccess(data).unwrap();
+          if (result.msg) toast.info("payment successful");
+          if (result.msg_error) toast.error("payment failure");
+        },
+        prefill: {
+          name: "LiveNex",
+          email: "livenex@gmail.com",
+          contact: "985745310",
+        },
+        notes: {
+          address: "Example Corporate Office",
+        },
+        theme: {
+          color: "#61dafb",
+        },
+      };
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-  }catch(err){
-    console.error(err);
-  }
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    } catch (err) {
+      console.error(err);
+    }
   }
   return (
     <div className="bg-white pt-8">
@@ -189,15 +185,6 @@ const Subscription = () => {
                   onClick={displayRazorpay}
                 >
                   Subscribe
-                </a>
-                <p className="text-base font-semibold text-gray-600 mt-3">
-                  Try a free trial for 30 days
-                </p>
-                <a
-                  className="mt-5 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer"
-                  onClick={displayRazorpay}
-                >
-                  Free Trial
                 </a>
               </div>
             </div>

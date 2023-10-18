@@ -96,21 +96,14 @@ const Users = () => {
               </table>
               <div className="mt-4 justify-center text-gray-700">
                 {userslist?.length > 8 ? (
-                  // <ReactPaginate
-                  //   className="ml-10 flex justify-center m-4 mr-3 pr-2"
-                  //   previousLabel={"Prev"}
-                  //   nextLabel={"Next"}
-                  //   pageCount={Math.ceil(userslist.length / itemsPerPage)}
-                  //   onPageChange={handlePageChange}
-                  // />
                   <div className="w-full p-4 border border-gray-300 rounded-lg shadow-md">
                     <ReactPaginate
                       containerClassName="flex justify-center"
                       pageLinkClassName="mx-1 p-1"
                       previousLinkClassName="mx-1 p-1"
                       nextLinkClassName="mx-1 p-1"
-                      previousLabel="< Previous"
-                      nextLabel="Next >"
+                      previousLabel=" Previous"
+                      nextLabel="Next "
                       onPageChange={handlePageChange}
                       pageRangeDisplayed={5}
                       pageCount={Math.ceil(userslist.length / itemsPerPage)}

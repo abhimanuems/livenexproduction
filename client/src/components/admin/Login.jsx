@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import {useLoginAdminMutation} from '../../slices/adminApiSlice.js'
+import { useLoginAdminMutation } from "../../slices/adminApiSlice.js";
 import { useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCredentialsAdmin } from "../../slices/adminAuthSlice.js";
 
 function Login() {
@@ -15,12 +15,12 @@ function Login() {
   useEffect(() => {
     if (adminInfo) {
       navigate("/admins/dashboard");
-    }else{
-      navigate('/admins/login')
+    } else {
+      navigate("/admins/login");
     }
   }, [adminInfo, navigate]);
 
-  const login = async(e) => {
+  const login = async (e) => {
     e.preventDefault();
     if (userName.trim() === "") {
       toast.error("Enter a valid username");
@@ -30,15 +30,17 @@ function Login() {
       toast.error("Enter a valid password");
       return;
     }
-   await loginAPI({userName,password}).unwrap().then((response)=>{
-    toast.info("login successful");
-    dispatch(setCredentialsAdmin({details: response.adminUserName }));
-    navigate("/admins/dashboard");
-
-   }).catch((err)=>{
-     toast.error("invalid username or password");
-     console.error(err);
-   })
+    await loginAPI({ userName, password })
+      .unwrap()
+      .then((response) => {
+        toast.info("login successful");
+        dispatch(setCredentialsAdmin({ details: response.adminUserName }));
+        navigate("/admins/dashboard");
+      })
+      .catch((err) => {
+        toast.error("invalid username or password");
+        console.error(err);
+      });
   };
 
   return (
@@ -58,8 +60,6 @@ function Login() {
           </p>
 
           <form onSubmit={login}>
-            {" "}
-            {/* Move onSubmit to the form */}
             <div className="mt-3 p-2">
               <label
                 id="email"
@@ -83,7 +83,6 @@ function Login() {
                 Password
               </label>
               <div className="relative flex items-center justify-center">
-                
                 <input
                   id="pass"
                   type="password"
@@ -92,17 +91,10 @@ function Login() {
                     setPassword(e.target.value);
                   }}
                 />
-                {/* <div className="absolute right-0 mt-2 mr-3 cursor-pointer">
-                  <img
-                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/sign_in-svg5.svg"
-                    alt="viewport"
-                  />
-                </div> */}
               </div>
             </div>
             <div className="mt-8">
               <button
-                role="button"
                 className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
                 type="submit"
               >

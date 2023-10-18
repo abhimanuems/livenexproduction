@@ -45,9 +45,6 @@ const login = async (req, res) => {
           if (err) throw err;
         });
     }
-    // else if(!user){
-    //   res.status(400).json("not data found at database")
-    // }
   } catch (err) {
     if (err) throw err;
     res.json(err.message);

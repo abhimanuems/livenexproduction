@@ -1,7 +1,17 @@
-import React from 'react'
-import {BsFacebook, BsYoutube} from "react-icons/bs"
+import React from "react";
+import { BsFacebook, BsYoutube } from "react-icons/bs";
+import { useEffect } from "react";
+import {useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Share = () => {
+  const { userInfo } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(!userInfo){
+      navigate('/login');
+    }
+  },[])
   return (
     <div className="mt-10 overflow-hidden">
       <h1 className="text-4xl text-center text-gray-500 font-bold">
@@ -9,8 +19,7 @@ const Share = () => {
       </h1>
       <div className=" ml-6 p-2 text-gray-500 text-center text-lg mt-4 mx-8 font-light">
         <p className="m-2 p-2">
-          ✨ Stream to  Youtube, Facebook  destinations at the
-          same time.
+          ✨ Stream to Youtube, Facebook destinations at the same time.
         </p>
         <p className="m-2 p-2">
           ✨ No complicated downloads — livestream directly from your browser.
@@ -42,6 +51,6 @@ const Share = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Share
+export default Share;

@@ -49,7 +49,7 @@ const getBroadCastId = async (
         if (err) {
           console.error(`Error creating live broadcast: ${err}`);
           response.status(403).json({ error: err });
-          return
+          return;
         } else {
           const broadcastId = await res.data.id;
 
@@ -60,10 +60,9 @@ const getBroadCastId = async (
                 "youtube.broadcastId": broadcastId,
               },
             }
-          )
-          
+          );
 
-         createYoutubeStreams(
+          createYoutubeStreams(
             title,
             description,
             accessToken,
@@ -175,9 +174,8 @@ const bindYoutubeBroadcastToStream = async (
         },
       }
     );
-     res.status(200).json({ message: "streaming YT done" });
+    res.status(200).json({ message: "streaming YT done" });
     await startStreaming(youtubeBroadcastId, youtubeAccessToken, userId);
-   
 
     return response.data;
   } catch (error) {

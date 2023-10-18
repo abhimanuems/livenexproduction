@@ -5,84 +5,79 @@ import nodemailer from "nodemailer";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, "../../.env") });
-import { generateAdminToken } from '../middileware/generateToken.js';
+import { generateAdminToken } from "../middileware/generateToken.js";
 import User from "../models/userModels.js";
 const adminLogin = (req, res) => {
   try {
-    const {userName,password} = req.body;
-    if(userName ===process.env.adminUserName && password ===process.env.adminPassword){
-        generateAdminToken(res, userName);
-         res.status(200).json({ message: "login successfull",adminUserName:userName });
+    const { userName, password } = req.body;
+    if (
+      userName === process.env.adminUserName &&
+      password === process.env.adminPassword
+    ) {
+      generateAdminToken(res, userName);
+      res
+        .status(200)
+        .json({ message: "login successfull", adminUserName: userName });
+    } else {
+      res.status(400).json({ error: "invalid username or password" });
     }
-    else{
-        res.status(400).json({error:"invalid username or password"})
-    }
-
-     
   } catch (err) {
     console.error(err);
   }
 };
 
-const getUsers =async (req,res)=>{
-  try{
-      const users = await User.find();
-      res.status(200).json({users});
-  }catch(err){
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({ users });
+  } catch (err) {
     console.error(err.message);
   }
+};
 
-}
-
-const banUser = async(req,res)=>{
-    try{
-      const userId =  req.params.id;
+const banUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
     const response = await User.updateOne({ _id: userId }, { status: false });
-    res.status(200).json({message:"baned successfully", userId})
-   
+    res.status(200).json({ message: "baned successfully", userId });
+  } catch (err) {
+    console.error(err, message);
+    res.status(400).json({ message: "internal error" });
+  }
+};
+const unblock = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const response = await User.updateOne({ _id: userId }, { status: true });
+    res.status(200).json({ message: "unblock successfull", userId });
+  } catch (err) {
+    console.error(err.message);
+    res.status(400).json({ message: "internal error" });
+  }
+};
 
-    }catch(err){
-        console.error(err,message);
-         res.status(400).json({message:"internal error"})
-    }
-}
-const unblock =async (req,res)=>{
-    try{
-        const userId = req.params.id;
-        const response = await User.updateOne(
-          { _id: userId },
-          { status: true }
-        );
-       res.status(200).json({ message: "unblock successfull", userId });
-    }catch(err){
-        console.error(err.message)
-        res.status(400).json({message:"internal error"});
-    }
+const subscriptionsDetails = async (req, res) => {
+  try {
+    const date = new Date();
+    const subscriptions = await User.find({ "razorpayDetails.success": true });
+    res.status(200).json({ subscriptions });
+  } catch (err) {
+    console.error(err.message);
+  }
+};
 
-}
-
-const subscriptionsDetails =async(req,res)=>{
-    try{
-      const date = new Date();
-     const subscriptions = await User.find({ "razorpayDetails.success" : true});
-     res.status(200).json({ subscriptions }); 
-    }catch(err){
-        console.error(err.message);
-    }
-}
-
-const tickets =async(req,res)=>{
-  try{
+const tickets = async (req, res) => {
+  try {
     User.aggregate([
       {
         $match: {
-          tickets: { $ne: [] }, 
+          tickets: { $ne: [] },
         },
       },
       {
         $project: {
-          tickets: 1, 
-          _id:0
+          tickets: 1,
+          _id: 0,
         },
       },
     ])
@@ -92,14 +87,13 @@ const tickets =async(req,res)=>{
       .catch((err) => {
         res.status(400).json({ error: err });
       });
-
-  }catch(err){
-    console.log("error at admin ticket",err.message);
-    res.status(400).json({error:"error at fetching"});
+  } catch (err) {
+    console.log("error at admin ticket", err.message);
+    res.status(400).json({ error: "error at fetching" });
   }
-}
+};
 
-const sendMail = (email, subject,reply, res) => {
+const sendMail = (email, subject, reply, res) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -109,7 +103,7 @@ const sendMail = (email, subject,reply, res) => {
       pass: "wtowedoazweumtqw",
     },
   });
-  
+
   const mailOptions = {
     from: "clubofabhimanue@gmail.com",
     to: email,
@@ -129,14 +123,12 @@ const sendMail = (email, subject,reply, res) => {
   });
 };
 
-const ticketResolve =async(req,res)=>{
-  try{
-
+const ticketResolve = async (req, res) => {
+  try {
     const email = req.body.data.email;
     const subject = req.body.data.subject;
-     const replyMessage = req.body.data.replyMessage;
-     const id = req.body.data.id;
- 
+    const replyMessage = req.body.data.replyMessage;
+    const id = req.body.data.id;
 
     User.findOneAndUpdate(
       {
@@ -146,35 +138,35 @@ const ticketResolve =async(req,res)=>{
         },
       },
       {
-        $set: { "tickets.$.status": true }, 
+        $set: { "tickets.$.status": true },
       },
       { new: true }
     )
       .then((response) => {
-       res.status(200).json({response});
+        res.status(200).json({ response });
       })
       .catch((err) => {
         console.log(err);
       });
-     sendMail(email, subject,replyMessage, res);
-  }catch(err){
-    console.error(err.message)
-    res.status(400).json("internal error")
+    sendMail(email, subject, replyMessage, res);
+  } catch (err) {
+    console.error(err.message);
+    res.status(400).json("internal error");
   }
-}
+};
 
-const logout = async(req,res)=>{
-  try{
+const logout = async (req, res) => {
+  try {
     res.cookie("adminjwt", "", {
       httpOnly: true,
       expires: new Date(0),
     });
     res.status(200).json("admin logged out successfully");
-  }catch(err){
+  } catch (err) {
     console.error(err.message);
-      res.status(400).json("internal error");
+    res.status(400).json("internal error");
   }
-}
+};
 
 export {
   adminLogin,

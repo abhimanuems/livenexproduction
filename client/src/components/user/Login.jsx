@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-  useGoogleAuthMutation,
-  useLoginMutation,
-} from "../../slices/userApiSlice";
+import { useLoginMutation } from "../../slices/userApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../../slices/authSlice";
-import {FcGoogle} from 'react-icons/fc'
+import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [google] = useGoogleAuthMutation();
   const [login] = useLoginMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,7 +23,7 @@ export default function Login() {
     try {
       const response = await login({ email, password }).unwrap();
       if (response.message) {
-        dispatch(setCredentials({ deatils :response.user.email }));
+        dispatch(setCredentials({ deatils: response.user.email }));
         navigate("/");
         toast.error(response);
       } else if (response.error) {
@@ -40,14 +36,12 @@ export default function Login() {
   };
   const googleAuth = async () => {
     try {
-      const authWindow = window.open(
-        "https://livenex.online/auth/google"
-      );
+      const authWindow = window.open("https://livenex.online/auth/google");
 
       const messageListener = (event) => {
         if (event.origin === "https://livenex.online") {
-          const response = event.data; 
-          console.log("google auth login is ",response)
+          const response = event.data;
+          console.log("google auth login is ", response);
           toast.info("login successful");
 
           dispatch(setCredentials({ deatils: response.email }));
@@ -58,7 +52,6 @@ export default function Login() {
         }
       };
       window.addEventListener("message", messageListener);
-    
     } catch (error) {
       if (error) throw error;
       toast.error(error.message);
@@ -126,10 +119,9 @@ export default function Login() {
           </div>
 
           <p className="mt-8 text-xs font-light text-center text-gray-700">
-            {" "}
-            Don't have an account?{" "}
+            Don't have an account?
             <Link to="/signup">
-              <a href="#" className="font-medium text-blue-600 hover:underline">
+              <a href="" className="font-medium text-blue-600 hover:underline">
                 Sign up
               </a>
             </Link>
@@ -139,4 +131,3 @@ export default function Login() {
     </div>
   );
 }
-

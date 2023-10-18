@@ -9,7 +9,9 @@ const shimmerAnimation = {
 const ShimmerLoader = () => {
   return (
     <div className="flex justify-center items-center h-32">
-      <div className="w-32 h-8" style={shimmerAnimation}>Loading</div>
+      <div className="w-full h-full" style={shimmerAnimation}>
+        Loading...
+      </div>
     </div>
   );
 };

@@ -17,31 +17,33 @@ const Header = () => {
   const [pro, setPro] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
   useEffect(() => {
-    if(userInfo)
-    subscribe()
-      .unwrap()
-      .then((isSubscribed) => {
-        if (isSubscribed) {
-          setPro(true);
-        }
-      })
-      .catch((err) => {
-        console.error(err.message);
-        toast.error(err.message);
-      });
+    if (userInfo)
+      subscribe()
+        .unwrap()
+        .then((isSubscribed) => {
+          if (isSubscribed) {
+            setPro(true);
+          }
+        })
+        .catch((err) => {
+          console.error(err.message);
+          toast.error(err.message);
+        });
   }, [pro]);
 
   const logoutHandler = async () => {
     try {
-       await logoutApiCall().unwrap().then((res)=>{
-        toast.error("logout successfully");
-         dispatch(logout());
-         navigate("/login");
-      }).catch((err)=>{
-        toast.error("internal error")
-        console.error(err)
-      })
-     
+      await logoutApiCall()
+        .unwrap()
+        .then((res) => {
+          toast.error("logout successfully");
+          dispatch(logout());
+          navigate("/login");
+        })
+        .catch((err) => {
+          toast.error("internal error");
+          console.error(err);
+        });
     } catch (err) {
       toast.error(err.message);
       console.error(err);

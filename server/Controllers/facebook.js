@@ -122,7 +122,7 @@ const postFBcomments = async (req, res) => {
   try {
     const result = await User.findOne({ _id: req.userEmail });
     const accessToken = result.facebook.accessToken;
-   
+
     const liveVideoId = "122119841660032468";
 
     const commentData = {
@@ -134,13 +134,10 @@ const postFBcomments = async (req, res) => {
     axios.post(url, commentData);
   } catch (err) {
     if (err.response) {
-      
       console.error("Response Error:", err.response.data);
     } else if (err.request) {
-     
       console.error("Request Error:", err.request);
     } else {
-      
       console.error("Error:", err.message);
     }
   }
