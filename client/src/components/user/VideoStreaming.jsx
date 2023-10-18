@@ -10,7 +10,6 @@ import {
 import {
   AiFillVideoCamera,
   AiFillCloseCircle,
-  AiFillLike,
   AiOutlineLike,
 } from "react-icons/ai";
 import { MdScreenShare } from "react-icons/md";
