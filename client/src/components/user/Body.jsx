@@ -10,30 +10,35 @@ import Destination from "../user/Destination";
 import { toast } from "react-toastify";
 import { BsFacebook, BsYoutube } from "react-icons/bs";
 
-
 const Body = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [pro, setPro] = useState(false);
-  const [data,setData] =useState([]);
+  const [data, setData] = useState(null);
   const { userInfo } = useSelector((state) => state.auth);
   const [subscribe] = useSubscriptionMutation();
-  const [streamsAPI] = useGetPastStreamsMutation();
+  const [streamsAPI, { isLoading }] = useGetPastStreamsMutation(); // Track API loading state
+  const [hasFetchedData, setHasFetchedData] = useState(false); // Track if data has been fetched
+
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
     } else {
-      streamsAPI()
-        .unwrap()
-        .then((pdata) => {
-          console.log("streaing ddata is ", pdata);
-          setData(pdata);
-        })
-        .catch((err) => {
-          console.error(err.message);
-        });
+      if (!hasFetchedData && !isLoading) {
+        // Check if data hasn't been fetched and API call isn't in progress
+        streamsAPI()
+          .unwrap()
+          .then((pdata) => {
+            console.log("streaing ddata is ", pdata);
+            setData(pdata);
+            setHasFetchedData(true); // Update state to indicate data has been fetched
+          })
+          .catch((err) => {
+            console.error(err.message);
+          });
+      }
     }
-  }, [navigate, userInfo, data]);
+  }, [navigate, userInfo, hasFetchedData, isLoading]);
 
   useEffect(() => {
     const isSubscribed = subscribe().unwrap();
@@ -48,8 +53,6 @@ const Body = () => {
   const handleModal = () => {
     return true;
   };
-
-
 
   return (
     <div className="bg-white w-5/6 p-4">
@@ -68,7 +71,7 @@ const Body = () => {
         )}
       </div>
       <hr />
-      {data?.length > 0 ? (
+      {hasFetchedData &&data?.length > 0 ? ( 
         <div>
           <p className="font-semibold text-gray-700 text-lg p-2 m-2">
             Past streams
@@ -95,7 +98,9 @@ const Body = () => {
                           <BsYoutube />
                         </span>
                       ) : item.destinations === "facebook" ? (
-                        <span className="text-blue-500"><BsFacebook/></span>
+                        <span className="text-blue-500">
+                          <BsFacebook />
+                        </span>
                       ) : null}
                     </td>
                   </tr>
