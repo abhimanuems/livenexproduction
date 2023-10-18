@@ -192,7 +192,7 @@ const getStreamDetails = async(req,res)=>{
     const userId = req.userEmail;
     User.find({ _id: userId }, { streams: 1, _id: 0 })
       .then((response) => {
-        res.status(200).json({ response });
+        res.status(200).json({response: response[0]?.streams});
       })
       .catch((err) => {
         res.status(400).json({ err });

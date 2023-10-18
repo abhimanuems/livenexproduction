@@ -96,7 +96,7 @@ const Body = () => {
                 </tr>
               </thead>
               <tbody>
-                {data?.response?.streams.map((item, index) => (
+                {data?.response?.map((item, index) => (
                   // {response?.streams.map((item, index) => (
                   <tr key={index} className="text-gray-600 text-sm font-medium">
                     {console.log(item)}
