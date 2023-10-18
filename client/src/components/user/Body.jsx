@@ -113,7 +113,7 @@ const Body = () => {
                           }}
                         />
                       ) : null}
-                      {item?.destinations[1]?.facebook === true ? (
+                      {item?.destinations[0]?.facebook === true ? (
                         <BsFacebook
                           style={{
                             fontSize: "20px",

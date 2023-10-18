@@ -301,10 +301,6 @@ const VideoStreaming = () => {
                     />
                     <p className="ml-2 text-blue-500">{fbviewCount}</p>
                   </div>
-                  <div className="flex mt-2">
-                    <AiFillLike style={{ fontSize: "20px", color: "blue" }} />
-                    <p className="ml-2 text-blue-500">{YTLikeCount}</p>
-                  </div>
                 </>
               ) : null}
             </div>
