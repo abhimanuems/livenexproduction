@@ -44,7 +44,7 @@ const VideoStreaming = () => {
   const [isShareScreen, SetShareScreen] = useState(false);
   const navigate = useNavigate();
   const [stream, setStream] = useState(null);
-  const [isStream, setStreams] = useState(true);
+  const [isStream,setStreams] = useState(true)
   const [rtmpUrlFb, setRtmpFb] = useState(null);
   const [rtmpurlYoutube, setyoutubeRTMP] = useState(null);
   const [fbliveComments, setFbLiveComments] = useState(null);
@@ -152,6 +152,8 @@ const VideoStreaming = () => {
     }
   };
 
+
+
   const socket = io("https://ffmpegserverlivenex.shop", {
     transports: ["websocket"],
     query: {
@@ -162,6 +164,7 @@ const VideoStreaming = () => {
   });
 
   const handleStartRecording = () => {
+
     if (!socket) {
       toast.error("Socket is not initialized");
       console.error("Socket is not initialized.");
@@ -238,6 +241,7 @@ const VideoStreaming = () => {
   };
 
   const leaveStudio = () => {
+   
     socket.emit("client-stop-ffmpeg");
     if (stream) {
       const tracks = stream.getTracks();
@@ -248,6 +252,7 @@ const VideoStreaming = () => {
     dispatch(clearRTMPURLS());
     deleteRTMPURL();
     navigate("/home");
+    
   };
 
   const sendComment = async () => {
@@ -407,25 +412,25 @@ const VideoStreaming = () => {
               ) : null}
             </p>
 
-            <div className="h-screen overflow-y-auto ">
+            <div className="h-72 overflow-y-auto">
               <Chat comments={[fbliveComments, ytLivecomments]} />
             </div>
-            <div className="flex items-center mt-24 ">
-              <input
-                type="text"
-                placeholder="Type your comment here..."
-                className="w-full p-2 border border-gray-300 rounded-l-lg"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600"
-                onClick={sendComment}
-              >
-                Send
-              </button>
-            </div>
           </div>
+        </div>
+        <div className="flex items-center mt-24 ">
+          <input
+            type="text"
+            placeholder="Type your comment here..."
+            className="w-full p-2 border border-gray-300 rounded-l-lg"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600"
+            onClick={sendComment}
+          >
+            Send
+          </button>
         </div>
       </div>
     </div>
