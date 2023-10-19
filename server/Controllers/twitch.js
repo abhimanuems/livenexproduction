@@ -3,6 +3,7 @@ import {
   getUserId,
   getStreamKey,
 } from "../helpers/twichHelper.js";
+import User from "../models/userModels.js";
 
 const twitchAuth = (req, res) => {
   try {

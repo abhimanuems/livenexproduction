@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const getAccessToken = async (code) => {
   try {
     return await axios.post("https://id.twitch.tv/oauth2/token", null, {
