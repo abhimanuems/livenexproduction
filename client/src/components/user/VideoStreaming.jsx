@@ -5,7 +5,6 @@ import {
   BsCameraVideoOffFill,
   BsFacebook,
   BsYoutube,
-  BsTwitch,
   BsFillEyeFill,
 } from "react-icons/bs";
 import {
@@ -27,7 +26,6 @@ import {
   useYTviewCountMutation,
   useFBviewCountMutation,
   useDeleteRTMPURLSMutation,
-  useRtmpUrlTwitchMutation,
 } from "../../slices/userApiSlice.js";
 import { useDispatch } from "react-redux";
 import { clearRTMPURLS } from "../../slices/userDetails.js";
@@ -39,7 +37,6 @@ const VideoStreaming = () => {
   const intervalIdRef = useRef(null);
   const [fbcomments] = useFacebookGetCommentsMutation();
   const [youTubeComments] = useYoutubeCommentsMutation();
-  const [rtmpTwichAPI] = useRtmpUrlTwitchMutation();
   const [isCameraActive, setCameraActive] = useState(false);
   const [ismute, setMute] = useState(true);
   const [stopCam, setCam] = useState(true);
@@ -48,7 +45,6 @@ const VideoStreaming = () => {
   const [stream, setStream] = useState(null);
   const [isStream, setStreams] = useState(true);
   const [rtmpUrlFb, setRtmpFb] = useState(null);
-  const [rtmpUrlTwich, setTwitchRTmp] = useState(null);
   const [rtmpurlYoutube, setyoutubeRTMP] = useState(null);
   const [fbliveComments, setFbLiveComments] = useState(null);
   const [ytLivecomments, setYTliveComment] = useState(null);
@@ -69,8 +65,8 @@ const VideoStreaming = () => {
   const [FBstats, setFbstats] = useState(false);
   const [deleteRTMPURLS] = useDeleteRTMPURLSMutation();
   useEffect(() => {
-    if (!userInfo) {
-      navigate("/login");
+    if(!userInfo){
+      navigate('/login')
     }
     const getRTMPYTFB = async () => {
       const rtmpurlYT = await rtmpYoutube().unwrap();
@@ -84,12 +80,6 @@ const VideoStreaming = () => {
         getRTMPYTFB();
       } else {
         setRtmpFb(rtmpFBURL);
-      }
-      const rmtpTwitch = await rtmpTwichAPI().unwrap();
-      if (rmtpTwitch === null) {
-        rmtpTwitch();
-      } else {
-        setTwitchRTmp(rmtpTwitch);
       }
     };
     getRTMPYTFB();
@@ -169,7 +159,6 @@ const VideoStreaming = () => {
     query: {
       rtmpUrlYoutube: rtmpurlYoutube,
       rtmUrlFaceBook: rtmpUrlFb,
-      rtmpUrlTwitch: rtmpUrlTwich,
     },
     withCredentials: true,
   });
@@ -313,15 +302,6 @@ const VideoStreaming = () => {
                   </div>
                 </>
               ) : null}
-            </div>
-          ) : null}
-          {rtmpUrlTwich ? (
-            <div className="m-3 ml-4">
-              <BsTwitch
-                style={{ fontSize: "30px", color: "#6441A4" , cursor: "pointer" }}
-                onClick={showYTstats}
-              />
-            
             </div>
           ) : null}
         </div>

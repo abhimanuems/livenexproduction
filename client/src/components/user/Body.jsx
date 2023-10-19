@@ -8,7 +8,7 @@ import {
 import { clearRTMPURLS } from "../../slices/userDetails.js";
 import Destination from "../user/Destination";
 import { toast } from "react-toastify";
-import { BsFacebook, BsYoutube , BsTwitch } from "react-icons/bs";
+import { BsFacebook, BsYoutube } from "react-icons/bs";
 
 const Body = () => {
   const navigate = useNavigate();
@@ -117,16 +117,7 @@ const Body = () => {
                         <BsFacebook
                           style={{
                             fontSize: "20px",
-                            marginLeft: "2rem",
                             color: "blue",
-                          }}
-                        />
-                      ) : null}
-                      {item?.destinations[0]?.Twitch === true ? (
-                        <BsTwitch
-                          style={{
-                            fontSize: "20px",
-                            color: "#6441A4",
                             marginLeft: "2rem",
                           }}
                         />

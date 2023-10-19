@@ -81,12 +81,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       method: "get",
     }),
-    rtmpUrlTwitch: builder.mutation({
-      query: () => ({
-        url: "users/rtmptwitch",
-      }),
-      method: "get",
-    }),
     subscription: builder.mutation({
       query: () => ({
         url: "users/subscription",
@@ -131,17 +125,17 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: "get",
       }),
     }),
-    getPastStreams: builder.mutation({
-      query: () => ({
-        url: "users/streamdetails",
-        method: "get",
-      }),
+    getPastStreams : builder.mutation({
+      query:()=>({
+        url :"users/streamdetails",
+        method: "get"
+      })
     }),
     streamDetails: builder.mutation({
       query: (data) => ({
         url: "users/streamdetails",
         method: "post",
-        body: data,
+        body:data
       }),
     }),
     logout: builder.mutation({
@@ -175,7 +169,6 @@ export const {
   useTicketMutation,
   useTicketDataMutation,
   useStreamDetailsMutation,
-  useGetPastStreamsMutation,
-  useRtmpUrlTwitchMutation
+  useGetPastStreamsMutation
 
 } = userApiSlice;
