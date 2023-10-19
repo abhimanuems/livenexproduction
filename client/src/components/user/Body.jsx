@@ -67,14 +67,13 @@ const Body = () => {
         {pro ? (
           <Destination onClick={handleModal} />
         ) : (
-          <Destination onClick={handleModal} />
-          // <button
-          //   className="bg-transparent hover:bg-blue-500 text-[#576CBC] font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-          //   type="button"
-          //   onClick={() => toast.info("subscribe to continue")}
-          // >
-          //   Create Live
-          // </button>
+          <button
+            className="bg-transparent hover:bg-blue-500 text-[#576CBC] font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            type="button"
+            onClick={() => toast.info("subscribe to continue")}
+          >
+            Create Live
+          </button>
         )}
       </div>
       <hr />
@@ -118,8 +117,8 @@ const Body = () => {
                         <BsFacebook
                           style={{
                             fontSize: "20px",
+                            marginLeft: "2rem",
                             color: "blue",
-                
                           }}
                         />
                       ) : null}

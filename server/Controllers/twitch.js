@@ -44,8 +44,8 @@ const twitchOauthCallback = async (req, res) => {
       {
         $set: {
           "twitch.userId": user_id,
-          "twitch.rtmpUrl" :rtmp,
-          "twitch.streamKey" :stream_key
+          "twitch.rtmpUrl": rtmp_url,
+          "twitch.streamKey": stream_key,
         },
       }
     )

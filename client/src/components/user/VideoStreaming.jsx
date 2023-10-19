@@ -315,6 +315,15 @@ const VideoStreaming = () => {
               ) : null}
             </div>
           ) : null}
+          {rtmpUrlTwich ? (
+            <div className="m-3 ml-4">
+              <BsTwitch
+                style={{ fontSize: "30px", color: "#6441A4" , cursor: "pointer" }}
+                onClick={showYTstats}
+              />
+            
+            </div>
+          ) : null}
         </div>
         <div className="w-full h-96 mb-4 pt-7">
           <video
