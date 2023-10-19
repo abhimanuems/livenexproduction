@@ -48,7 +48,7 @@ const VideoStreaming = () => {
   const [stream, setStream] = useState(null);
   const [isStream, setStreams] = useState(true);
   const [rtmpUrlFb, setRtmpFb] = useState(null);
-  const [rtmpUrlTwich,setTwitchRTmp] = useState(null);
+  const [rtmpUrlTwich, setTwitchRTmp] = useState(null);
   const [rtmpurlYoutube, setyoutubeRTMP] = useState(null);
   const [fbliveComments, setFbLiveComments] = useState(null);
   const [ytLivecomments, setYTliveComment] = useState(null);
@@ -69,8 +69,8 @@ const VideoStreaming = () => {
   const [FBstats, setFbstats] = useState(false);
   const [deleteRTMPURLS] = useDeleteRTMPURLSMutation();
   useEffect(() => {
-    if(!userInfo){
-      navigate('/login')
+    if (!userInfo) {
+      navigate("/login");
     }
     const getRTMPYTFB = async () => {
       const rtmpurlYT = await rtmpYoutube().unwrap();
@@ -86,11 +86,11 @@ const VideoStreaming = () => {
         setRtmpFb(rtmpFBURL);
       }
       const rmtpTwitch = await rtmpTwichAPI().unwrap();
-       if (rmtpTwitch === null) {
-         rmtpTwitch();
-       } else {
-         setTwitchRTmp(rmtpTwitch);
-       }
+      if (rmtpTwitch === null) {
+        rmtpTwitch();
+      } else {
+        setTwitchRTmp(rmtpTwitch);
+      }
     };
     getRTMPYTFB();
     return () => {
@@ -169,7 +169,7 @@ const VideoStreaming = () => {
     query: {
       rtmpUrlYoutube: rtmpurlYoutube,
       rtmUrlFaceBook: rtmpUrlFb,
-      rtmpUrlTwitch: rmtpTwitch,
+      rtmpUrlTwitch: rtmpUrlTwich,
     },
     withCredentials: true,
   });
