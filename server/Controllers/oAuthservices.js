@@ -22,6 +22,7 @@ const youtube = google.youtube({
   version: "v3",
   auth: oauth2Client,
 });
+
 const youtubeAuth = async (req, res) => {
   try {
     const authUrl = oauth2Client.generateAuthUrl({

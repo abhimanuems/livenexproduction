@@ -5,6 +5,7 @@ import {
   BsCameraVideoOffFill,
   BsFacebook,
   BsYoutube,
+  BsTwitch,
   BsFillEyeFill,
 } from "react-icons/bs";
 import {
@@ -26,6 +27,7 @@ import {
   useYTviewCountMutation,
   useFBviewCountMutation,
   useDeleteRTMPURLSMutation,
+  useRtmpUrlTwitchMutation,
 } from "../../slices/userApiSlice.js";
 import { useDispatch } from "react-redux";
 import { clearRTMPURLS } from "../../slices/userDetails.js";
@@ -37,6 +39,7 @@ const VideoStreaming = () => {
   const intervalIdRef = useRef(null);
   const [fbcomments] = useFacebookGetCommentsMutation();
   const [youTubeComments] = useYoutubeCommentsMutation();
+  const [rtmpTwichAPI] = useRtmpUrlTwitchMutation();
   const [isCameraActive, setCameraActive] = useState(false);
   const [ismute, setMute] = useState(true);
   const [stopCam, setCam] = useState(true);
@@ -45,6 +48,7 @@ const VideoStreaming = () => {
   const [stream, setStream] = useState(null);
   const [isStream, setStreams] = useState(true);
   const [rtmpUrlFb, setRtmpFb] = useState(null);
+  const [rtmpUrlTwich,setTwitchRTmp] = useState(null);
   const [rtmpurlYoutube, setyoutubeRTMP] = useState(null);
   const [fbliveComments, setFbLiveComments] = useState(null);
   const [ytLivecomments, setYTliveComment] = useState(null);
@@ -81,6 +85,12 @@ const VideoStreaming = () => {
       } else {
         setRtmpFb(rtmpFBURL);
       }
+      const rmtpTwitch = await rtmpTwichAPI().unwrap();
+       if (rmtpTwitch === null) {
+         rmtpTwitch();
+       } else {
+         setTwitchRTmp(rmtpTwitch);
+       }
     };
     getRTMPYTFB();
     return () => {
@@ -159,6 +169,7 @@ const VideoStreaming = () => {
     query: {
       rtmpUrlYoutube: rtmpurlYoutube,
       rtmUrlFaceBook: rtmpUrlFb,
+      rtmpUrlTwitch: rmtpTwitch,
     },
     withCredentials: true,
   });

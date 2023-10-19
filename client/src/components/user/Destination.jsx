@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BsFacebook, BsYoutube } from "react-icons/bs";
+import { BsFacebook, BsYoutube, BsTwitch } from "react-icons/bs";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { GrClose } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +19,7 @@ export default function Modal() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFb, setFb] = useState(false);
   const [isYoutube, SetYoutube] = useState(false);
+  const [isTwitch, SetTwitch] = useState(false);
   const [isAdddestination, setDestination] = useState(true);
   const [youTubeAccessToken, setYoutubeAccessToken] = useState(null);
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ export default function Modal() {
           }
         }
       }
-      if (isFb || isYoutube) {
+      if (isFb || isYoutube || isTwitch) {
         setShowModal(false);
 
         if (isFb) {
@@ -81,6 +82,7 @@ export default function Modal() {
           destinations: {
             youtube: isYoutube,
             facebook: isFb,
+            Twitch :isTwitch
           },
         };
 
@@ -104,6 +106,30 @@ export default function Modal() {
       setYTTD(true);
     }
   }, [isFb, isYoutube, youtubeTD]);
+
+
+  const twitch =()=>{
+    try{
+      const authWindow = window.open(
+        "https://livenex.online/users/twitchauth"
+      );
+       const messageListener = (event) => {
+         if (event.origin === "https://livenex.online") {
+           const response = event.data;
+           authWindow.close();
+           window.removeEventListener("message", messageListener);
+           if (response) {
+             toast.success("twitch added successfull");
+           } else {
+             toast.error("adding error in facebook");
+           }
+         }
+       };
+       window.addEventListener("message", messageListener);
+    }catch(err){
+
+    }
+  }
 
   const facebook = () => {
     try {
@@ -160,6 +186,11 @@ export default function Modal() {
     youtube();
   };
 
+  const addTwitch =()=>{
+    SetTwitch(true);
+    twitch();
+  }
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -198,6 +229,11 @@ export default function Modal() {
                     <button className="ml-3">
                       <BsYoutube style={{ fontSize: "40px", color: "red" }} />
                     </button>
+                    <button className="ml-3">
+                      <BsTwitch
+                        style={{ fontSize: "40px", color: "#6441A4" }}
+                      />
+                    </button>
                   </p>
                   <div className="relative inline-block text-left">
                     <div>
@@ -222,6 +258,16 @@ export default function Modal() {
                           >
                             <BsYoutube
                               style={{ fontSize: "20px", color: "red" }}
+                            />
+                          </button>
+                        ) : null}
+                        {isTwitch ? (
+                          <button
+                            className="py-2 px-2"
+                            onClick={() => SetTwitch(!isTwitch)}
+                          >
+                            <BsTwitch
+                              style={{ fontSize: "20px", color: "#6441A4" }}
                             />
                           </button>
                         ) : null}
@@ -273,6 +319,18 @@ export default function Modal() {
                             <button className="ml-3" onClick={addYoutube}>
                               <BsYoutube
                                 style={{ fontSize: "30px", color: "red" }}
+                              />
+                            </button>
+                          </a>
+                          <a
+                            className="text-gray-700 block px-4 py-2 text-sm"
+                            role="menuitem"
+                            tabIndex="-1"
+                            id="menu-item-1"
+                          >
+                            <button className="ml-3" onClick={addTwitch}>
+                              <BsTwitch
+                                style={{ fontSize: "30px", color: "#6441A4" }}
                               />
                             </button>
                           </a>

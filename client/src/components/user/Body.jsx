@@ -8,7 +8,7 @@ import {
 import { clearRTMPURLS } from "../../slices/userDetails.js";
 import Destination from "../user/Destination";
 import { toast } from "react-toastify";
-import { BsFacebook, BsYoutube } from "react-icons/bs";
+import { BsFacebook, BsYoutube , BsTwitch } from "react-icons/bs";
 
 const Body = () => {
   const navigate = useNavigate();
@@ -67,13 +67,14 @@ const Body = () => {
         {pro ? (
           <Destination onClick={handleModal} />
         ) : (
-          <button
-            className="bg-transparent hover:bg-blue-500 text-[#576CBC] font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-            type="button"
-            onClick={() => toast.info("subscribe to continue")}
-          >
-            Create Live
-          </button>
+          <Destination onClick={handleModal} />
+          // <button
+          //   className="bg-transparent hover:bg-blue-500 text-[#576CBC] font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+          //   type="button"
+          //   onClick={() => toast.info("subscribe to continue")}
+          // >
+          //   Create Live
+          // </button>
         )}
       </div>
       <hr />
@@ -118,6 +119,15 @@ const Body = () => {
                           style={{
                             fontSize: "20px",
                             color: "blue",
+                
+                          }}
+                        />
+                      ) : null}
+                      {item?.destinations[0]?.Twitch === true ? (
+                        <BsTwitch
+                          style={{
+                            fontSize: "20px",
+                            color: "#6441A4",
                             marginLeft: "2rem",
                           }}
                         />

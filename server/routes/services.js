@@ -30,6 +30,11 @@ import {
   FBviewCount,
   deleteRTMPURLS,
 } from "../Controllers/facebook.js";
+import {
+  twitchAuth,
+  twitchOauthCallback,
+  getRTMPTwitch,
+} from "../Controllers/twitch.js";
 
 const service = Router();
 
@@ -44,6 +49,10 @@ service.post("/tickets", protect, submitTickets);
 service.get("/tickets", protect, getTicketData);
 
 service.get("/youtubeauth", protect, youtubeAuth);
+
+service.get("/twitchauth", protect, twitchAuth);
+
+service.get("/twitchcallback", twitchOauthCallback);
 
 service.get("/oauth2callback", oauthCallback);
 
@@ -60,6 +69,8 @@ service.post("/fbcomments", protect, postFBcomments);
 service.get("/rtmpFB", protect, getRTMPFB);
 
 service.get("/rtmpYoutube", protect, getRTMPYT);
+
+service.get('/rtmptwitch',protect,getRTMPTwitch)
 
 service.post("/youtubeaccesstoken", protect, accessTokenYoutube);
 

@@ -33,6 +33,12 @@ const userSchema = mongoose.Schema(
       liveVideoId: String,
       liveChatId: String,
     },
+    twitch: {
+      userId: String,
+      rtmpUrl: String,
+      streamKey: String,
+      
+    },
     tickets: [
       {
         email: String,

@@ -1,7 +1,7 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://livenex.online/",
+  baseUrl: "http://localhost:8000",
   credentials: "include",
 });
 

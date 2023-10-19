@@ -167,6 +167,7 @@ const deleteRTMPURLS = async (req, res) => {
       $set: {
         "facebook.rtmpUrl": null,
         "youtube.rtmpUrl": null,
+        "twitch.rtmpUrl" :null
       },
     })
       .then((response) => {
