@@ -14,7 +14,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   useEffect(() => {
-    if (userInfo.deatils) {
+    if (userInfo) {
       navigate("/");
     }
   }, [navigate, userInfo]);
@@ -41,9 +41,11 @@ export default function Login() {
       const messageListener = (event) => {
         if (event.origin === "https://livenex.online") {
           const response = event.data;
-          if(response.email)
+          console.log("google auth login is ", response);
           toast.info("login successful");
+
           dispatch(setCredentials({ deatils: response.email }));
+          console.log(response);
           authWindow.close();
           window.removeEventListener("message", messageListener);
           if (response) navigate("/");
