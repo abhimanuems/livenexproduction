@@ -39,12 +39,15 @@ const Ticket = () => {
     e.preventDefault();
     if (email.trim() === "") {
       toast.error("kindly fill the email");
+      return
     }
     if (subject.trim() === "") {
       toast.error("Enter a subject");
+      return
     }
     if (description.trim() === "") {
       toast.error("Enter the description");
+      return
     }
     const data = { email, subject, description, status: false };
     ticketAPI(data)

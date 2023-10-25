@@ -41,7 +41,7 @@ const Dashboard = () => {
         { name: "wed", revenue: 0 },
         { name: "thu", revenue: 0 },
         { name: "fri", revenue: 0 },
-        { name: "sat", revenue: 1999 },
+        { name: "sat", revenue: 0 },
       ];
 
       const mockPieChartData = [
@@ -78,7 +78,6 @@ const Dashboard = () => {
     SubcribtionsAPI()
       .unwrap()
       .then((data) => {
-        console.log("subscription data is ", data);
         const subsribersList = data?.subscriptions?.length;
         setchartDatas(data);
         setnoOfSubscribers(subsribersList);
