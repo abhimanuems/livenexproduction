@@ -20,7 +20,6 @@ const VerifiyOtp = () => {
     try {
       const getOtp = async () => {
         const res = await otpVerify({ email: userDetails.email }).unwrap();
-        console.log("response is", res);
         if (res.error) {
           toast.error("Invalid email");
           navigate("/signup");

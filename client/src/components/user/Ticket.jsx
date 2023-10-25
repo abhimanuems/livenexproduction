@@ -19,7 +19,7 @@ const Ticket = () => {
   const [ticketDatas, setTicketData] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!userInfo) {
+    if (!userInfo.deatils) {
       navigate("/login");
     }
     getTicketData();

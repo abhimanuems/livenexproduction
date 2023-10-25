@@ -16,7 +16,7 @@ const Subscription = () => {
   const [subscribe] = useSubscriptionMutation();
   const navigate = useNavigate();
   useEffect(() => {
-    if (!userInfo) {
+    if (!userInfo.deatils) {
       navigate("/login");
     }
   }, [navigate, userInfo]);

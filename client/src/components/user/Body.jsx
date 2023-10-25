@@ -21,7 +21,7 @@ const Body = () => {
   const [hasFetchedData, setHasFetchedData] = useState(false);
 
   useEffect(() => {
-    if (!userInfo) {
+    if (!userInfo.deatils) {
       navigate("/login");
     } else {
       if (!hasFetchedData && !isLoading) {

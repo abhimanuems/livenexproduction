@@ -65,8 +65,8 @@ const VideoStreaming = () => {
   const [FBstats, setFbstats] = useState(false);
   const [deleteRTMPURLS] = useDeleteRTMPURLSMutation();
   useEffect(() => {
-    if(!userInfo){
-      navigate('/login')
+    if (!userInfo.deatils) {
+      navigate("/login");
     }
     const getRTMPYTFB = async () => {
       const rtmpurlYT = await rtmpYoutube().unwrap();

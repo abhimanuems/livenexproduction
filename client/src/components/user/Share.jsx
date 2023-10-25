@@ -8,8 +8,8 @@ const Share = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(()=>{
-    if(!userInfo){
-      navigate('/login');
+    if (!userInfo.deatils) {
+      navigate("/login");
     }
   },[])
   return (
