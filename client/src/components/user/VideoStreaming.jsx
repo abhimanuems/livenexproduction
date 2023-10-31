@@ -262,7 +262,7 @@ const VideoStreaming = () => {
   };
 
   return (
-    <div className="flex h-fit bg-gray-100">
+    <div className="flex h-fit bg-gray-100 overflow-hidden">
       <div className="w-9/12">
         <div className="flex justify-between">
           {rtmpurlYoutube ? (
@@ -404,7 +404,7 @@ const VideoStreaming = () => {
               ) : null}
             </p>
 
-            <div className="h-72 overflow-y-auto relative ">
+            <div className="h-72 w-96 overflow-y-hidden relative ">
               <Chat comments={[fbliveComments, ytLivecomments]} />
             </div>
           </div>
@@ -413,7 +413,7 @@ const VideoStreaming = () => {
           <input
             type="text"
             placeholder="Type your comment here..."
-            className="w-full p-2 border border-gray-300 rounded-l-lg"
+            className="w-2/3 p-2 border border-gray-300 rounded-l-lg"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />

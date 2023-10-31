@@ -14,6 +14,7 @@ import {
 
 const facebook = async (req, res) => {
   try {
+     req.session.email = req.userEmail;
     const authUrl = `https://www.facebook.com/v12.0/dialog/oauth?client_id=${process.env.FACEBOOKID}&redirect_uri=${process.env.FACEBOOKAUTHREDIRECTURL}&scope=publish_video,read_insights`;
     res.redirect(authUrl);
   } catch (err) {
@@ -23,7 +24,7 @@ const facebook = async (req, res) => {
 };
 const oauthCallbackFB = async (req, res) => {
   try {
-    const userId = req.userEmail;
+    const userId = req.session.email;
     const authorizationCode = req.query.code;
     if (!authorizationCode) {
       return res.status(400).send("Authorization code missing.");

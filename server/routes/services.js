@@ -58,7 +58,7 @@ service.get("/oauth2callback", oauthCallback);
 
 service.get("/facebookauth", protect, facebook);
 
-service.get("/oauth2callbackfb", protect, oauthCallbackFB);
+service.get("/oauth2callbackfb", oauthCallbackFB);
 
 service.post("/fbtoken", protect, getFbAccessToken);
 
