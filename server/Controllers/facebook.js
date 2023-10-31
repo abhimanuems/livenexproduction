@@ -22,6 +22,8 @@ const facebook = async (req, res) => {
     throw err;
   }
 };
+
+//callback from fb
 const oauthCallbackFB = async (req, res) => {
   try {
     const userId = req.session.email;
