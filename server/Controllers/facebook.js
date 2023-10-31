@@ -64,6 +64,8 @@ const oauthCallbackFB = async (req, res) => {
   }
 };
 
+//for get accessing tokens
+
 const getFbAccessToken = async (req, res) => {
   try {
     const title = req.body.titleDescription.title;
